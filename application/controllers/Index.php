@@ -242,6 +242,7 @@ class Index extends CI_Controller
 				if ($search == null) {
 					$search = "";
 				}
+				$search = urldecode($search); //파라매타의 한글 깨짐 해결
 				$now_gallery = $this->main_model->get_idx_gallery($idx);
 				$previous_gallery = $this->main_model->get_previous_idx($idx, $search);
 				$next_gallery = $this->main_model->get_next_idx($idx, $search);

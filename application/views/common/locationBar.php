@@ -23,7 +23,7 @@
 		</div>
 		<button data-toggle="collapse" href="#mH2" aria-expanded="false" aria-controls="mH2" class="mHright" data-page="dalma"></button>
 		<div class="collapse" id="mH2">
-			<div data-page="dalma" onclick="location.href='../info/dalma.php'">달마선원</div>
+			<div data-page="dalma" onclick="location.href='<?=base_url()?>index/info/dalma'">달마선원</div>
 		</div>
 		<button data-toggle="collapse" href="#mH3" aria-expanded="false" aria-controls="mH3" class="mHright" data-page="establish"></button>
 		<div class="collapse" id="mH3">
