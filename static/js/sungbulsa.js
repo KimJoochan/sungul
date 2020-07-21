@@ -850,7 +850,7 @@ function insertSponsor() {
     var type = 'insert';
     var money = $('#insert-sponsor .money').val();
     var name = $('#insert-sponsor .name').val();
-    var location = $('#insert-sponsor .location').val();
+    var location2 = $('#insert-sponsor .location').val();
 
     if (money.length < 1) {
         alert('후원금액을 입력해주세요');
@@ -863,27 +863,22 @@ function insertSponsor() {
         return false;
     } else {
         $.ajax({
-            url: '../info/sponsorAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/sponsorAction`,
             type: 'POST',
             data: {
                 'type': type,
                 'money': money,
                 'name': name,
-                'location': location
+                'location': location2
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 입력되었습니다.');
-                    history.back();
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    $('#insert-sponsor')[0].reset();
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+                if(data){
+                	alert('스퐅서 등록완료');
+					location.href=`${baseUrl}/index/info/sponsor`;
+				}
             }
         }); //ajax
     }
@@ -907,8 +902,7 @@ function updateSponsor(idx) {
         return false;
     } else {
         $.ajax({
-            url: '../info/sponsorAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/sponsorAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -921,10 +915,10 @@ function updateSponsor(idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
+                if (data) {
                     alert('성공적으로 수정되었습니다.');
                     history.back();
-                } else if (data.result == '0') {
+                } else {
                     alert('오류가 발생하였습니다.');
                     $('#insert-sponsor')[0].reset();
                     console.log('result : ' + data.result + ', msg : ' + data.msg);
@@ -939,8 +933,7 @@ function deleteSponsor(idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
         var type = 'delete';
         $.ajax({
-            url: '../info/sponsorAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/sponsorAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -950,9 +943,9 @@ function deleteSponsor(idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
+                if (data) {
                     alert('성공적으로 삭제되었습니다.');
-                    location.href = "sponsor.php";
+                    location.href = `${baseUrl}/index/info/sponsor`;
                 } else if (data.result == '0') {
                     alert('오류가 발생하였습니다.');
                     console.log('result : ' + data.result + ', msg : ' + data.msg);

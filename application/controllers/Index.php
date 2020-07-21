@@ -91,6 +91,23 @@ class Index extends CI_Controller
 				$this->__estaInsert("/info/updateExecutive",array('res'=>$res,'idx'=>$idx));
 				break;
 			}
+			//스폰서작업페이지
+			case 'sponsor':	{
+				$res = $this->main_model->get_by_name();
+				$this->__estaInsert("/info/sponsor", array('res' => $res));
+				break;
+			}
+			case "insertSponsor":{
+				$this->__estaInsert("/info/insertSponsor");
+				break;
+			}
+			case "updateSponsor":{
+				$idx=$this->input->get('idx');
+				$res=$this->main_model->select_sponsor($idx);
+				$this->__estaInsert("/info/updateSponsor",array('res'=>$res,'idx'=>$idx));
+				break;
+			}
+
 			case 'scholarship':	{
 				$year = $this->uri->segment(4);
 				if ($year == null) {
@@ -101,15 +118,6 @@ class Index extends CI_Controller
 				$get_by_year = $this->main_model->get_by_year($year);
 				$get_cnt = $this->main_model->get_cnt($year);
 				$this->__estaInsert("/info/scholarship", array('year' => $year, 'row' => $get_by_year, 'row1' => $get_cnt));
-				break;
-			}
-			case 'sponsor':
-			{
-				$res = $this->main_model->get_by_name();
-				$this->__estaInsert("/info/sponsor", array('res' => $res));
-				break;
-			}
-			case "insertSponsor":{
 				break;
 			}
 			case "insertScholar":{
@@ -313,6 +321,28 @@ class Index extends CI_Controller
 			case 'login_out':{
 				$res = $this->login_model->logout();
 				echo "<script>alert('로그아웃이 되었습니다.');history.back(1);</script>";
+				break;
+			}
+			//스폰서 함수들
+			case 'sponsorAction':{
+				$type=$this->input->post('type');
+				if($type=="insert"){
+					$money = $_POST['money'];
+					$name = $_POST['name'];
+					$location = $_POST['location'];
+					echo $this->main_model->insert_sponsor($money,$name,$location);
+
+				}else if($type=="delete"){
+					$idx = $_POST['idx'];
+					echo $this->main_model->delete_sponsor($idx);
+				}else if($type=="update"){
+					$money = $_POST['money'];
+					$name = $_POST['name'];
+					$location = $_POST['location'];
+                	$idx=$_POST['idx'];
+					$res= $this->main_model->update_sponsor($money,$name,$location,$idx);
+					echo  $res;
+				}
 				break;
 			}
 			//장학금 수혜자 함수들

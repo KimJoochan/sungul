@@ -148,7 +148,23 @@ class Main_model extends CI_Model
 		$sql = "SELECT * FROM executive order by seq asc";
 		return $this->db->query($sql)->result_array();
 	}
-
+	//스폰서 함수들
+	function insert_sponsor($money,$name,$location){
+		$sql = "INSERT INTO sponsor(money,name,location,regdate) VALUES('$money','$name','$location',now())";
+		return $this->db->query($sql);
+	}
+	function delete_sponsor($idx){
+		$sql = "DELETE FROM sponsor WHERE idx = '$idx'";
+		return $this->db->query($sql);
+	}
+	function select_sponsor($idx){
+		$sql = "SELECT * FROM sponsor WHERE idx = '$idx'";
+		return $this->db->query($sql)->result_array();
+	}
+	function update_sponsor($money,$name,$location,$idx){
+		$sql = "UPDATE sponsor SET money='$money',name='$name',location='$location' WHERE idx='$idx'";
+		return $this->db->query($sql);
+	}
 	//알림방 list쓰이는 함수들 시작
 	function get_count($search,$uri_var){
 		if($uri_var=="notice"){
