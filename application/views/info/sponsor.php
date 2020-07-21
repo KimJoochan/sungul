@@ -2,7 +2,7 @@
       <div class="inner" id="page-inner">
         <div class="title" id="page-title">장학금 후원자 현황</div>
         <?php if(isset($_SESSION['id'])){?>
-          <span class="btn" onclick="location.href='../info/insertSponsor.php'">등록하기</span>
+          <span class="btn" onclick="location.href='<?=base_url()?>index/info/insertSponsor'">등록하기</span>
         <?php } ?>
         <table class="table text-center">
           <thead>

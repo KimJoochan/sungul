@@ -58,8 +58,8 @@
             <td><?= $value->local ?></td>
             <?php if(isset($_SESSION['id'])){?>
             <td>
-              <img src="../img/update.png" alt="" onclick="location.href='../info/updateScholar.php?idx='+<?= $value->idx ?>">
-              <img src="../img/delete.png" alt="" onclick="deleteScholar(<?= $value->idx ?>);">
+              <img src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href='<?=base_url()?>index/info/updateScholar?idx=<?= $value->idx ?>'">
+              <img src="<?=base_url()?>static/img/delete.png" alt="" onclick="deleteScholar(<?= $value->idx ?>);">
             </td>
             <?php } ?>
           </tr>

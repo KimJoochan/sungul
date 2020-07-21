@@ -128,14 +128,13 @@ function login() {
 
 
 function insertScholar() {
-    var type = 'insert';
     var year = $('#insert-scholar .year').val();
     var name = $('#insert-scholar .name').val();
     var school = $('#insert-scholar .school').val();
     var grade = $('#insert-scholar .grade').val();
     var local = $('#insert-scholar .local').val();
     var degree = $('#insert-scholar .degree:checked').val();
-
+	var type='insert'
     if (year.length < 1) {
         alert('장학년도를 입력해주세요');
         return false;
@@ -156,11 +155,10 @@ function insertScholar() {
         return false;
     } else {
         $.ajax({
-            url: '../info/scholarAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/scholarAction`,
             type: 'POST',
             data: {
-                'type': type,
+            	'type':type,
                 'year': year,
                 'name': name,
                 'degree': degree,
@@ -172,15 +170,10 @@ function insertScholar() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 입력되었습니다.');
-                    $('#insert-scholar')[0].reset();
-                    location.href = "../info/scholarship.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    $('#insert-scholar')[0].reset();
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+                if(data){
+                	alert('등록이 되었습니다.');
+                	location.href=`${baseUrl}/index/info/scholarship/${year}`
+				}
             }
         }); //ajax
     }
@@ -189,26 +182,22 @@ function insertScholar() {
 
 function deleteScholar(idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
-        var type = 'delete';
+    	var type='delete';
         $.ajax({
-            url: '../info/scholarAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/scholarAction`,
             type: 'POST',
             data: {
-                'type': type,
+            	'type':type,
                 'idx': idx
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 삭제되었습니다.');
-                    location.href = "../info/scholarship.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+                if (data){
+                	alert('정상적으로 삭제되었습니다.');
+                	location.href=`${baseUrl}/index/info/scholarship`;
+				}
             }
         }); //ajax
     }
@@ -216,14 +205,13 @@ function deleteScholar(idx) {
 /*장학회삭제*/
 
 function updateScholar(idx) {
-    var type = 'update';
     var year = $('#insert-scholar .year').val();
     var name = $('#insert-scholar .name').val();
     var school = $('#insert-scholar .school').val();
     var grade = $('#insert-scholar .grade').val();
     var local = $('#insert-scholar .local').val();
     var degree = $('#insert-scholar .degree:checked').val();
-
+	var type='update';
     if (year.length < 1) {
         alert('장학년도를 입력해주세요');
         return false;
@@ -244,11 +232,10 @@ function updateScholar(idx) {
         return false;
     } else {
         $.ajax({
-            url: '../info/scholarAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/scholarAction`,
             type: 'POST',
             data: {
-                'type': type,
+            	'type':type,
                 'year': year,
                 'name': name,
                 'degree': degree,
@@ -261,15 +248,10 @@ function updateScholar(idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 수정되었습니다.');
-                    $('#insert-scholar')[0].reset();
-                    location.href = "../info/scholarship.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    $('#insert-scholar')[0].reset();
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+                if(data){
+                	alert('수정완료');
+                	location.href=`${baseUrl}/index/info/scholarship`;
+				}
             }
         }); //ajax
     }
@@ -287,7 +269,7 @@ function updateScholarCnt() {
         return false;
     } else {
         $.ajax({
-            url: '../info/scholarAction.php',
+            url: `${baseUrl}/index/action/scholarAction`,
             data: {
                 'grade1': grade1,
                 'grade2': grade2,
@@ -296,19 +278,12 @@ function updateScholarCnt() {
                 'type': type,
                 'year': year
             },
-            dataType: 'JSON',
             type: 'POST',
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 수정되었습니다.');
-                    location.href = "../info/scholarship.php?year=" + year;
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+                console.log(data);
             }
         });
     }
@@ -648,7 +623,6 @@ function insertExecutive() {
     var job = $('#insert-executive .job').val();
     var name = $('#insert-executive .name').val();
     var phone = $('#insert-executive .phone').val();
-
     if (job.length < 1) {
         alert('직무를 입력해주세요');
         return false;
@@ -660,8 +634,7 @@ function insertExecutive() {
         return false;
     } else {
         $.ajax({
-            url: '../info/executiveAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/executiveAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -673,15 +646,10 @@ function insertExecutive() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 입력되었습니다.');
-                    $('#insert-executive')[0].reset();
-                    location.href = "../info/organization.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    $('#insert-executive')[0].reset();
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+               if(data){
+               		alert('등록이 되었습니다');
+               		location.href=`${baseUrl}/index/info/organization`;
+			   }
             }
         }); //ajax
     }
@@ -692,8 +660,7 @@ function deleteExecutive(idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
         var type = 'delete';
         $.ajax({
-            url: '../info/executiveAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/executiveAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -703,13 +670,10 @@ function deleteExecutive(idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 삭제되었습니다.');
-                    location.href = "../info/organization.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+				if(data){
+					alert('삭제 되었습니다');
+					location.href=`${baseUrl}/index/info/organization`;
+				}
             }
         }); //ajax
     }
@@ -733,8 +697,7 @@ function updateExecutive(idx) {
         return false;
     } else {
         $.ajax({
-            url: '../info/executiveAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/executiveAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -747,10 +710,10 @@ function updateExecutive(idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
+                if (data) {
                     alert('성공적으로 수정되었습니다.');
-                    $('#insert-executive')[0].reset();
-                    location.href = "../info/organization.php";
+                    location.href = `${baseUrl}/index/info/organization`;
+					$('#insert-executive')[0].reset();
                 } else if (data.result == '0') {
                     alert('오류가 발생하였습니다.');
                     $('#insert-executive')[0].reset();
@@ -770,8 +733,7 @@ function moveExecutive(way, seq, test, idx) {
         console.log('seq 더 내려가지 않음.');
     } else {
         $.ajax({
-            url: '../info/executiveAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/executiveAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -782,12 +744,13 @@ function moveExecutive(way, seq, test, idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    $('#executive .exeTbody').html(data.table);
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+            	var data=JSON.parse(data);
+            	if (data.result == '1') {
+					$('#executive .exeTbody').html(data.table);
+				} else if (data.result == '0') {
+					alert('오류가 발생하였습니다.');
+					console.log('result : ' + data.result + ', msg : ' + data.msg);
+				}
             }
         }); //ajax
     }

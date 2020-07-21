@@ -9,6 +9,7 @@
 	<script src="<?= base_url() ?>static/js/jquery-3.3.1.min.js"></script>
 	<script src="<?= base_url() ?>static/js/swiper.min.js"></script>
 	<script src="<?= base_url() ?>static/js/bootstrap-datetimepicker.js"></script>
+	<script src="<?= base_url() ?>static/js/bootstrap.min.js"></script>
 
 	<link href="<?= base_url() ?>static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="<?= base_url() ?>static/css/bootstrap.min.css" rel="stylesheet">

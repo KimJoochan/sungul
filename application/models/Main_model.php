@@ -7,29 +7,25 @@ class Main_model extends CI_Model
 		parent::__construct();
 	}
 
-	function get_notice()
-	{
+	function get_notice(){
 		$sql = "SELECT * FROM notice ORDER BY idx desc LIMIT 5";
 		$res = $this->db->query($sql)->result();
 		return $res;
 	}
 
-	function get_gallery()
-	{
+	function get_gallery(){
 		$sql = "SELECT * FROM gallery ORDER BY idx desc LIMIT 4";
 		$res = $this->db->query($sql)->result();
 		return $res;
 	}
 
-	function get_oragani()
-	{
+	function get_oragani(){
 		$sql = "SELECT * FROM executive order by seq asc";
 		$res = $this->db->query($sql)->result();
 		return $res;
 	}
 
-	function get_max()
-	{
+	function get_max(){
 		$sql = "SELECT MAX(seq) as max FROM executive";
 		$res = $this->db->query($sql)->result();
 		$max = $res[0]->max;
@@ -78,6 +74,81 @@ class Main_model extends CI_Model
 		$result = $this->db->query($sql)->result();
 		return $result;
 	}
+	//장학금 수혜자에서 쓰이는 함수
+	function scholarInsert($year,$name,$degree,$school,$grade,$local){
+		$this->db->set('regdate', 'NOW()', false);
+		$this->db->set('year', $year);
+		$this->db->set('name', $name);
+		$this->db->set('school', $school);
+		$this->db->set('grade', $grade);
+		$this->db->set('degree', $degree);
+		$this->db->set('local', $local);
+		$this->db->insert('scholarship');
+		return $this->db->insert_id();
+	}
+	function scholarDelete($idx){
+		$sql = "DELETE FROM scholarship WHERE idx = '$idx'";
+		return $this->db->query($sql);
+	}
+	function get_scholar_idx($idx){
+		$sql="SELECT * FROM scholarship WHERE idx = '$idx'";
+		return $this->db->query($sql)->result_array();
+	}
+	function scholarUpdate($year,$name,$degree,$school,$grade,$local,$idx){
+		$sql = "UPDATE scholarship SET year='$year',name='$name',school='$school',grade='$grade',local='$local',degree='$degree' WHERE idx='$idx'";
+		return $this->db->query($sql);
+	}
+	function scholar_update_cnt($grade1,$grade2,$grade3,$grade4,$sum,$year){
+		$sql = "UPDATE scholarship_cnt SET grade1='$grade1',grade2='$grade2',grade3='$grade3',grade4='$grade4',sum='$sum' WHERE year='$year'";
+		echo $sql;
+		//return $this->db->query($sql);
+	}
+	//임원직들에서 쓰이는 함수들
+	function get_max_exec(){
+		$sql = "SELECT MAX(seq) as max FROM executive";
+		return $this->db->query($sql)->result_array();
+	}
+	function insert_exec($job,$name,$phone,$max){
+		$sql = "INSERT INTO executive(job,name,phone,regdate,seq) VALUES('$job','$name','$phone',now(),'$max')";
+		return $this->db->query($sql);
+	}
+	function delete_exec($idx){
+		$sql = "DELETE FROM executive WHERE idx = '$idx'";
+		return $this->db->query($sql);
+	}
+	function get_exec_idx($idx){
+		$sql = "SELECT * FROM executive WHERE idx = '$idx'";
+		return $this->db->query($sql)->result_array();
+	}
+	function update_exec($idx,$job,$name,$phone){
+		$sql = "UPDATE executive SET job='$job',name='$name',phone='$phone' WHERE idx='$idx'";
+		return $this->db->query($sql);
+	}
+	function up_exec($seq1){
+		$sql="SELECT * FROM executive where seq<'$seq1' order by seq desc";
+		return $this->db->query($sql)->result_array();
+	}
+	function down_exec($seq1){
+		$sql="SELECT * FROM executive where seq>'$seq1' order by seq asc";
+		return $this->db->query($sql)->result_array();
+	}
+	function up_update_exe($seq1,$idx2){
+		$sql="UPDATE executive SET seq='$seq1' where idx='$idx2'";
+		return $this->db->query($sql);
+	}
+	function select_max_exec(){
+		$sql = "SELECT MAX(seq) as max FROM executive";
+		return $this->db->query($sql)->result_array();
+	}
+	function select_min_exec(){
+		$sql = "SELECT MIN(seq) as min FROM executive";
+		return $this->db->query($sql)->result_array();
+	}
+	function select_asc_seq(){
+		$sql = "SELECT * FROM executive order by seq asc";
+		return $this->db->query($sql)->result_array();
+	}
+
 	//알림방 list쓰이는 함수들 시작
 	function get_count($search,$uri_var){
 		if($uri_var=="notice"){

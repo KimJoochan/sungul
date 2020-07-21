@@ -2,7 +2,7 @@
       <div class="inner" id="page-inner">
         <div class="title" id="page-title">도량소개</div>
         <div class="contents">
-          <img src="<?base_rul()=?>img/info-1.png" class="mobile-img">
+          <img src="<?=base_url()?>static/img/info-1.png" class="mobile-img">
           <div class="top"><!-- 대한불교 조계종 제 7교구 수덕사 -->&nbsp;
             <div class="bar"></div>
           </div>

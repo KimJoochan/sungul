@@ -49,46 +49,49 @@ class Index extends CI_Controller
 		$this->load->view($arg, $par);
 	}
 
-	public function info()
-	{
+	public function info(){
 		$uri_var = ($this->uri->segment(3));
 		$this->__head();
 		switch ($uri_var) {
 			case 'info':
 				$this->__infoInsert("/info/info_2");
 				break;
-			case 'greeting':
-			{
+			case 'greeting':{
 				$this->__infoInsert("/info/greeting_2");
 				break;
 			}
-			case 'directions':
-			{
+			case 'directions':{
 				$this->__infoInsert("/info/direction_2");
 				break;
 			}
-			case 'dalma':
-			{
+			case 'dalma':{
 				$this->load->view("/info/dalm_1");
 				$this->load->view("/common/locationBar");
 				$this->load->view("/info/dalm_2");
 				break;
 			}
-			case 'establish':
-			{
+			case 'establish':{
 				$this->__estaInsert("/info/esta_2");
 				break;
 			}
-			case 'organization':
-			{
+			case 'organization':{
 				$notice = $this->main_model->get_oragani();
 				$max = $this->main_model->get_max();
 				$min = $this->main_model->get_min();
 				$this->__estaInsert("/info/ora", array("res" => $notice, "max" => $max, "min" => $min));
 				break;
 			}
-			case 'scholarship':
-			{
+			case 'insertExecutive':{
+				$this->__estaInsert("/info/insertExecutive");
+				break;
+			}
+			case 'updateExecutive':{
+				$idx=$this->input->get('idx');
+				$res=$this->main_model->get_exec_idx($idx);
+				$this->__estaInsert("/info/updateExecutive",array('res'=>$res,'idx'=>$idx));
+				break;
+			}
+			case 'scholarship':	{
 				$year = $this->uri->segment(4);
 				if ($year == null) {
 					$year = date("Y");
@@ -106,45 +109,55 @@ class Index extends CI_Controller
 				$this->__estaInsert("/info/sponsor", array('res' => $res));
 				break;
 			}
-			case 'schedule':
-			{
+			case "insertSponsor":{
+				break;
+			}
+			case "insertScholar":{
+				$year=$this->input->get('year');
+				$this->__estaInsert('/info/insertScholar',array("year"=>$year));
+				break;
+			}
+			case "updateScholar":{
+				$idx=$this->input->get('idx');
+				$res=$this->main_model->get_scholar_idx($idx);
+				$this->__estaInsert('/info/updateScholar',array("res"=>$res,'idx'=>$idx));
+				break;
+			}
+
+
+			//정기법회 행사계획
+			case 'schedule':{
 				$get_year_sch = $this->main_model->get_year_schedule();
 				$get_month_sch = $this->main_model->get_month_schedule();
 				$this->__scheduInsert("/info/schedule_foo", array("year_sch" => $get_year_sch, "month_sch" => $get_month_sch));
 				break;
 			}
-			case 'month':
-			{
+			case 'month':{
 				$event = $this->main_model->get_event();
 				$this->__scheduInsert("/info/month_sch", array('event' => $event));
 				break;
 			}
-			case "insertEvent":
-			{
+			case "insertEvent":	{
 				$this->__scheduInsert("/info/insertEvent");
 				break;
 			}
-			case "updateEvent" :
-			{
+			case "updateEvent" :{
 				$res = $this->main_model->get_event_order_start();
 				$this->__scheduInsert("/info/updateEvent", array('res' => $res));
 				break;
 			}
-			case "updateEventEach":
-			{
+			case "updateEventEach":{
 				$id = $this->input->get('id');
 				$res = $this->main_model->get_event_id($id);
 				$this->__scheduInsert("info/updateEventEach", array('res' => $res));
 				break;
 			}
-			case "insertSchedule":
-			{
+			case "insertSchedule":{
 				$type = $this->input->get("type");
 				$this->__scheduInsert("info/insertSchdule", array('type' => $type));
 				break;
 			}
-			case "updateSchedule":
-			{
+			case "updateSchedule":{
 				$idx = $this->input->get('idx');
 				$type = $this->input->get('type');
 				$table = '';
@@ -157,6 +170,7 @@ class Index extends CI_Controller
 				$this->__scheduInsert("info/updateSch", array('res' => $res, 'idx' => $idx, 'type' => $type));
 				break;
 			}
+
 			default:
 				redirect(base_url() . 'index');
 				break;
@@ -169,8 +183,7 @@ class Index extends CI_Controller
 		$uri_var = ($this->uri->segment(3));
 		$this->__head();
 		switch ($uri_var) {
-			case "notice":
-			{
+			case "notice":{
 				$page = $this->uri->segment(4);
 				$search = $this->uri->segment(5);
 				if ($page == null) {
@@ -190,8 +203,7 @@ class Index extends CI_Controller
 				$this->__scheduInsert("/board/notice", array('search' => $search, 's_point' => $s_point, 'row' => $res, 'num' => $num, 'page_num' => $page_num, 'page' => $page, 's_page' => $s_page, 'e_page' => $e_page));
 				break;
 			}
-			case "gallery":
-			{
+			case "gallery":	{
 				$page = $this->uri->segment(4);
 				$search = $this->uri->segment(5);
 				if ($page == null) {
@@ -210,8 +222,7 @@ class Index extends CI_Controller
 				$this->__scheduInsert("/board/gallery", array('block' => 5, 'search' => $search, 's_point' => $s_point, 'row' => $res, 'num' => $num, 'page_num' => $page_num, 'page' => $page, 's_page' => $s_page, 'e_page' => $e_page));
 				break;
 			}
-			case "galleryView":
-			{
+			case "galleryView":	{
 				$uri = (array_reverse(explode('/', $_SERVER['REQUEST_URI'])));
 				$idx = $uri[0];
 				$search = $uri[1];
@@ -228,18 +239,15 @@ class Index extends CI_Controller
 				$this->__scheduInsert("/board/galleryView", array('idx' => $idx, 'search' => $search, 'page' => $page, "now" => $now_gallery, "pre" => $previous_gallery, "next" => $next_gallery));
 				break;
 			}
-			case "insertGallery":
-			{
+			case "insertGallery":{
 				$this->__scheduInsert("/board/insertGallery");
 				break;
 			}
-			case "login":
-			{
+			case "login":{
 				$this->load->view("/board/login");
 				break;
 			}
-			case "updateGallery":
-			{
+			case "updateGallery":{
 				$uri = (array_reverse(explode('/', $_SERVER['REQUEST_URI'])));
 				$idx = $uri[0];
 				$search = $uri[1];
@@ -248,8 +256,7 @@ class Index extends CI_Controller
 				$this->__scheduInsert("/board/updateGallery", array('idx' => $idx, 'search' => $search, 'page' => $page, 'res' => $res));
 				break;
 			}
-			case "noticeView":
-			{
+			case "noticeView":{
 				if (!isset($_GET['page'])) {
 					$page = 1;
 				} else {
@@ -267,13 +274,11 @@ class Index extends CI_Controller
 				$this->__scheduInsert("/board/noticeView", array('view' => $view, 'page' => $page, 'search' => $search, 'idx' => $idx, 'nextrow' => $next_view, "prevrow" => $pre_view));
 				break;
 			}
-			case "insertNotice":
-			{
+			case "insertNotice":{
 				$this->__scheduInsert("/board/insertNotice");
 				break;
 			}
-			case "updateNotice":
-			{
+			case "updateNotice":{
 				$idx = $_GET['idx'];
 				if (!isset($_GET['search'])) {
 					$search = "";
@@ -296,8 +301,7 @@ class Index extends CI_Controller
 		$this->load->view('/common/footer');
 	}
 
-	public function action()
-	{
+	public function action(){
 		$uri_var = ($this->uri->segment(3));
 		switch ($uri_var) {
 			case 'login':
@@ -306,14 +310,123 @@ class Index extends CI_Controller
 				$res = $this->login_model->loginAction($id, $pwd);
 				echo $res->result;
 				break;
-			case 'login_out':
-			{
+			case 'login_out':{
 				$res = $this->login_model->logout();
 				echo "<script>alert('로그아웃이 되었습니다.');history.back(1);</script>";
 				break;
 			}
-			case "galleryAction":
-			{
+			//장학금 수혜자 함수들
+			case "scholarAction":{
+				$type=$this->input->post('type');
+				if($type=="insert" || $type=="update") {
+					$year = $this->input->post('year');
+					$name = $this->input->post('name');
+					$degree = $this->input->post('degree');
+					$school = $this->input->post('school');
+					$grade = $this->input->post('grade');
+					$local = $this->input->post('local');
+				}
+				if($type=="delete" || $type =="update"){
+					$idx = $this->input->post('idx');
+				}
+				if($type=="insert"){
+					$res=$this->main_model->scholarInsert($year,$name,$degree,$school,$grade,$local);
+					echo $res;
+				}else if($type=="update") {
+					$res=$this->main_model->scholarUpdate($year,$name,$degree,$school,$grade,$local,$idx);
+					echo $res;
+				}else if($type=="delete"){
+					echo $this->main_model->scholarDelete($idx);
+				}else if($type=="update_cnt"){
+					$year = $_POST['year'];
+					$grade1 = $_POST['grade1'];
+					$grade2 = $_POST['grade2'];
+					$grade3 = $_POST['grade3'];
+					$grade4 = $_POST['grade4'];
+					$sum = (int)$grade1+(int)$grade2+(int)$grade3+(int)$grade4;
+					echo $this->main_model->scholar_update_cnt($grade1,$grade2,$grade3,$grade4,$sum,$year);
+				}
+				break;
+			}
+		//임원등록 함수들
+			case 'executiveAction':{
+				$type=$this->input->post('type');
+				if($type=="insert" || $type =="update"){
+					$job = $_POST['job'];
+					$name = $_POST['name'];
+					$phone = $_POST['phone'];
+				}
+				if($type=="insert"){
+					$max_exe=$this->main_model->get_max_exec();
+					$max=(int)$max_exe[0]['max']+1;
+					$res=$this->main_model->insert_exec($job,$name,$phone,$max);
+					echo $res;
+				}else if($type=="delete"){
+					$idx=$this->input->post('idx');
+					$res=$this->main_model->delete_exec($idx);
+					echo $res;
+				}else if($type=="update"){
+					$idx = $_POST['idx'];
+					$res=$this->main_model->update_exec($idx,$job,$name,$phone);
+					echo $res;
+				}
+				if($type=="up" || $type=="down"){
+					$seq1 = $_POST['seq'];
+					$idx1 = $_POST['idx'];
+					if($type=="up"){
+						$res=$this->main_model->up_exec($seq1);
+					}else if($type=="down"){
+						$res=$this->main_model->down_exec($seq1);
+					}
+					$rowcnt=count($res);
+					if($rowcnt!=0){
+						$seq2="";
+						foreach ($res as $key => $value){
+							$seq2 = $value['seq'];
+							$idx2 = $value['idx'];
+							break;
+						}
+						$update_res=$this->main_model->up_update_exe($seq1,$idx2);
+						if($update_res){
+							$upres=$this->main_model->up_update_exe($seq2,$idx1);
+							if($upres){
+								$res=$this->main_model->select_max_exec();
+								$max='';
+								foreach ($res as $key => $value){
+									$max=$value['max'];
+									break;
+								}
+								$resMin=$this->main_model->select_min_exec();
+								foreach ($resMin as $key => $value){
+									$min=$value['min'];
+									break;
+								}
+								$res=$this->main_model->select_asc_seq();
+								$table="";
+								foreach ($res as $key => $value) {
+									$job=$value['job'];
+									$name=$value['name'];
+									$phone=$value['phone'];
+									$seq=$value['seq'];
+									$idx=$value['idx'];
+									$table.='<tr>';
+									$table.='<td>'.$job.'</td>';
+									$table.='<td>'.$name.'</td>';
+									$table.='<td>'.$phone.'</td>';
+									$table.='<td><img src="'.base_url().'static/img/top_icon.png" alt="" onclick="moveExecutive(\'up\','.$seq.','.$min.','.$idx.');">';
+									$table.='<img src="'.base_url().'static/img/bottom_icon.png" alt="" onclick="moveExecutive(\'down\','.$seq.','.$max.','.$idx.');">';
+									$table.='<img src="'.base_url().'static/img/update.png" alt="" onclick="location.href=\''.base_url().'index/info/updateExecutive?idx='.$idx.'\'">';
+									$table.='<img src="'.base_url().'static/img/delete.png" alt="" onclick="deleteExecutive('.$idx.');"></td></tr>';
+								}
+								echo @json_encode(array("result" => '1',"table"=>$table));
+							}
+						}
+					}
+				}
+				break;
+			}
+			// 갤러리 액션 함수들
+			case "galleryAction":{
 				$title = $this->input->post('title');
 				$contents = $this->input->post('contents');
 				$raw_name = "";
@@ -330,15 +443,13 @@ class Index extends CI_Controller
 				}
 				break;
 			}
-			case "galleryDelete":
-			{
+			case "galleryDelete":{
 				$idx = $this->input->post('idx');
 				$res = $this->main_model->delete_gallery($idx);
 				echo $res;
 				break;
 			}
-			case "galleryUpdate":
-			{
+			case "galleryUpdate":{
 				$idx = $_POST['idx'];
 				$title = $_POST['title'];
 				$contents = $_POST['contents'];
@@ -351,8 +462,8 @@ class Index extends CI_Controller
 				$res = $this->main_model->update_gallery($idx, $title, $contents, $raw_name);
 				var_dump($res);
 			}
-			case "noticeAction":
-			{
+			//게시글 액션 함수들
+			case "noticeAction":{
 				$title = $this->input->post('title');
 				$contents = $this->input->post('contents');
 				$raw_name = "";
@@ -369,15 +480,13 @@ class Index extends CI_Controller
 				}
 				break;
 			}
-			case "noticeDelete":
-			{
+			case "noticeDelete":{
 				$idx = $this->input->post('idx');
 				$res = $this->main_model->deletetNotice($idx);
 				echo($res);
 				break;
 			}
-			case "noticeUpdate":
-			{
+			case "noticeUpdate":{
 				$idx = $_POST['idx'];
 				$title = $_POST['title'];
 				$contents = $_POST['contents'];
@@ -391,8 +500,7 @@ class Index extends CI_Controller
 				echo($res);
 				break;
 			}
-			case "eventAction":
-			{
+			case "eventAction":	{
 				$start = $this->input->post('start');
 				$end = $this->input->post('end');
 				$title = $this->input->post('title');
@@ -401,8 +509,7 @@ class Index extends CI_Controller
 				echo $res;
 				break;
 			}
-			case "downFile":
-			{
+			case "downFile":{
 				$name = $this->input->get('fileName');
 				$filepath = "./board/notice/$name";
 				$filesize = filesize($filepath);

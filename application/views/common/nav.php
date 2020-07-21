@@ -59,36 +59,36 @@
 		</a>
 	<nav id="sidebar-wrapper">
       <ul class="sidebar-nav">
-      	<li class="sidebar-brand"><a href="../index/index.php">성불사</a>
+      	<li class="sidebar-brand"><a href="<?=base_url()?>index/index.php">성불사</a>
         </li>
         <li class="sidebar-nav-item" data-toggle="collapse" href="#menu1_m" aria-expanded="false" aria-controls="menu1_m">우리도량소개
         </li>
         <div class="collapse" id="menu1_m">
-			<a href='../info/info.php'">도량소개</a>
-			<a href='../info/greeting.php'">주지스님인사말</a>
-			<a href='../info/directions.php'">오시는길</a>
+			<a href='<?=base_url()?>index/info/info'">도량소개</a>
+			<a href='<?=base_url()?>index/info/greeting'">주지스님인사말</a>
+			<a href='<?=base_url()?>index/info/directions'">오시는길</a>
 		</div>
 		<li class="sidebar-nav-item" data-toggle="collapse" href="#menu2_m" aria-expanded="false" aria-controls="menu2_m">달마선원
         </li>
         <div class="collapse" id="menu2_m">
-			<a href='../info/dalma.php'">달마선원</a>
+			<a href='<?=base_url()?>index/info/dalma'">달마선원</a>
 		</div>
 		<li class="sidebar-nav-item" data-toggle="collapse" href="#menu3_m" aria-expanded="false" aria-controls="menu3_m">달마공동체 둥지장학회
         </li>
         <div class="collapse" id="menu3_m">
-			<a href='../info/establish.php'">설립취지</a>
-			<a href='../info/organization.php'">기구표, 임원현황</a>
-			<a href='../info/scholarship.php'">장학금 수혜자</a><!-- 
+			<a href='<?=base_url()?>index/info/establish'">설립취지</a>
+			<a href='<?=base_url()?>index/info/organization'">기구표, 임원현황</a>
+			<a href='<?=base_url()?>index/info/scholarship'">장학금 수혜자</a><!--
 			<a href='../info/rule.php'">장학회 회칙</a> -->
-			<a href='../info/sponsor.php'">장학금 후원자현황</a>
+			<a href='<?=base_url()?>index/info/sponsor'">장학금 후원자현황</a>
 		</div>
 		<li class="sidebar-nav-item" data-toggle="collapse" href="#menu4_m" aria-expanded="false" aria-controls="menu4_m">정기법회 행사계획
         </li>
         <div class="collapse" id="menu4_m">
-			<a href='../info/schedule.php'">법회일정</a>
-			<a href='../info/month.php'">이달의 행사</a>
-			<a href='../board/notice.php'">알림방</a>
-			<a href='../board/gallery.php'">갤러리</a>
+			<a href='<?=base_url()?>index/info/schedule'">법회일정</a>
+			<a href='<?=base_url()?>index/info/month'">이달의 행사</a>
+			<a href='<?=base_url()?>index/board/notice'">알림방</a>
+			<a href='<?=base_url()?>index/board/gallery'">갤러리</a>
 		</div>
       </ul>
     </nav>
