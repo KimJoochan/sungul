@@ -17,5 +17,5 @@
 	<link href="<?= base_url() ?>static/css/swiper.min.css" rel="stylesheet">
 	<link href="<?= base_url() ?>static/css/sungbulsa.css" rel="stylesheet">
 	<link rel="shortcut icon" href="<?= base_url() ?>static/img/Favicon.ico" type="image/x-icon">
-
+	<!--깃에 파일을 업로드 하기-->
 </head>
