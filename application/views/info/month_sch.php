@@ -13,7 +13,6 @@
 ?>
 <script>
       $(function(){
-
         $('#calendar').fullCalendar({
           header: {
             left: 'prev,next today',
@@ -34,7 +33,7 @@
         <?php if(isset($_SESSION['id'])){?>
           <div>
             <a class="insert btn btn-lg" href="<?=base_url()?>index/info/insertEvent">등록하기</a>
-            <a class="update btn btn-lg" href="../info/updateEvent.php">수정하기</a>
+            <a class="update btn btn-lg" href="<?=base_url()?>index/info/updateEvent">수정하기</a>
           </div>
         <?php } ?>
         </div>

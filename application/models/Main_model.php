@@ -203,8 +203,53 @@ class Main_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query;
 	}
-	function down($filename){
-
+	//이벤트 관련된 함수들
+	function insert_event($start,$end,$title,$des){
+		$this->db->set('regdate', 'NOW()', false);
+		$this->db->set('start', $start);
+		$this->db->set('end', $end);
+		$this->db->set('title', $title);
+		$this->db->set('description', $des);
+		$this->db->insert('event');
+		$result = $this->db->insert_id();
+		return $result;
+	}
+	function get_event_order_start(){
+		$sql = "select * from event order by start desc";
+		return $this->db->query($sql)->result_array();
+	}
+	function get_event_id($id){
+		$sql = "SELECT * FROM event WHERE id = '$id'";
+		return $this->db->query($sql)->result_array();
+	}
+	function eventUpdate($id,$title,$start,$end,$description){
+		$sql = "UPDATE event SET title='$title',start='$start',end='$end',description='$description' WHERE id='$id'";
+		return $this->db->query($sql);
+	}
+	function eventDelte($id){
+		$sql = "DELETE FROM event WHERE id = '$id'";
+		return $this->db->query($sql);
+	}
+	function insertSche($title,$contents,$table){
+		//$sql = "INSERT INTO ".$table."(title,contents,regdate) VALUES('$title','$contents',now())";
+		$this->db->set('regdate', 'NOW()', false);
+		$this->db->set('title', $title);
+		$this->db->set('contents', $contents);
+		$this->db->insert($table);
+		$result = $this->db->insert_id();
+		return $result;
+	}
+	function show_schedule($idx,$table){
+		$sql = "SELECT * FROM ".$table." WHERE idx = '$idx'";
+		return $this->db->query($sql)->result_array();
+	}
+	function schUpdate($idx,$title,$contents,$table){
+		$sql = "UPDATE ".$table." SET title='$title',contents='$contents' WHERE idx='$idx'";
+		return $this->db->query($sql);
+	}
+	function schDelete($idx,$table){
+		$sql = "DELETE FROM ".$table." WHERE idx = '$idx'";
+		return $this->db->query($sql);
 	}
 }
 

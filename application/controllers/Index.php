@@ -19,7 +19,8 @@ class Index extends CI_Controller
 		$this->load->view('/common/nav');
 	}
 
-	public function index(){ //맨처음 화면
+	public function index()
+	{ //맨처음 화면
 		$notice = $this->main_model->get_notice();
 		$gallery = $this->main_model->get_gallery();
 		$this->__head();
@@ -27,57 +28,67 @@ class Index extends CI_Controller
 		$this->load->view('/common/footer');
 	}
 
-	function __infoInsert($arg){
+	function __infoInsert($arg)
+	{
 		$this->load->view("/info/info_com");
 		$this->load->view("/common/locationBar");
 		$this->load->view($arg);
 	}
 
-	function __estaInsert($arg, $par = ""){
+	function __estaInsert($arg, $par = "")
+	{
 		$this->load->view("/info/esta_com");
 		$this->load->view("/common/locationBar");
 		$this->load->view($arg, $par);
 	}
 
-	function __scheduInsert($arg = "", $par = ""){
+	function __scheduInsert($arg = "", $par = "")
+	{
 		$this->load->view("/info/sche_com");
 		$this->load->view("/common/locationBar");
 		$this->load->view($arg, $par);
 	}
 
-	public function info(){
+	public function info()
+	{
 		$uri_var = ($this->uri->segment(3));
 		$this->__head();
 		switch ($uri_var) {
 			case 'info':
 				$this->__infoInsert("/info/info_2");
 				break;
-			case 'greeting':{
+			case 'greeting':
+			{
 				$this->__infoInsert("/info/greeting_2");
 				break;
 			}
-			case 'directions':{
+			case 'directions':
+			{
 				$this->__infoInsert("/info/direction_2");
 				break;
 			}
-			case 'dalma':{
+			case 'dalma':
+			{
 				$this->load->view("/info/dalm_1");
 				$this->load->view("/common/locationBar");
 				$this->load->view("/info/dalm_2");
 				break;
 			}
-			case 'establish':{
+			case 'establish':
+			{
 				$this->__estaInsert("/info/esta_2");
 				break;
 			}
-			case 'organization':{
+			case 'organization':
+			{
 				$notice = $this->main_model->get_oragani();
 				$max = $this->main_model->get_max();
 				$min = $this->main_model->get_min();
 				$this->__estaInsert("/info/ora", array("res" => $notice, "max" => $max, "min" => $min));
 				break;
 			}
-			case 'scholarship':{
+			case 'scholarship':
+			{
 				$year = $this->uri->segment(4);
 				if ($year == null) {
 					$year = date("Y");
@@ -89,24 +100,61 @@ class Index extends CI_Controller
 				$this->__estaInsert("/info/scholarship", array('year' => $year, 'row' => $get_by_year, 'row1' => $get_cnt));
 				break;
 			}
-			case 'sponsor':	{
+			case 'sponsor':
+			{
 				$res = $this->main_model->get_by_name();
 				$this->__estaInsert("/info/sponsor", array('res' => $res));
 				break;
 			}
-			case 'schedule':{
+			case 'schedule':
+			{
 				$get_year_sch = $this->main_model->get_year_schedule();
 				$get_month_sch = $this->main_model->get_month_schedule();
 				$this->__scheduInsert("/info/schedule_foo", array("year_sch" => $get_year_sch, "month_sch" => $get_month_sch));
 				break;
 			}
-			case 'month':{
+			case 'month':
+			{
 				$event = $this->main_model->get_event();
 				$this->__scheduInsert("/info/month_sch", array('event' => $event));
 				break;
 			}
-			case "insertEvent":{
-				echo  123;
+			case "insertEvent":
+			{
+				$this->__scheduInsert("/info/insertEvent");
+				break;
+			}
+			case "updateEvent" :
+			{
+				$res = $this->main_model->get_event_order_start();
+				$this->__scheduInsert("/info/updateEvent", array('res' => $res));
+				break;
+			}
+			case "updateEventEach":
+			{
+				$id = $this->input->get('id');
+				$res = $this->main_model->get_event_id($id);
+				$this->__scheduInsert("info/updateEventEach", array('res' => $res));
+				break;
+			}
+			case "insertSchedule":
+			{
+				$type = $this->input->get("type");
+				$this->__scheduInsert("info/insertSchdule", array('type' => $type));
+				break;
+			}
+			case "updateSchedule":
+			{
+				$idx = $this->input->get('idx');
+				$type = $this->input->get('type');
+				$table = '';
+				if ($_GET['type'] == 'year') {
+					$table = 'year_schedule';
+				} else if ($_GET['type'] == 'month') {
+					$table = 'month_schedule';
+				};
+				$res = $this->main_model->show_schedule($idx, $table);
+				$this->__scheduInsert("info/updateSch", array('res' => $res, 'idx' => $idx, 'type' => $type));
 				break;
 			}
 			default:
@@ -224,20 +272,21 @@ class Index extends CI_Controller
 				$this->__scheduInsert("/board/insertNotice");
 				break;
 			}
-			case "updateNotice":{
+			case "updateNotice":
+			{
 				$idx = $_GET['idx'];
-				if(!isset($_GET['search'])){
-					$search="";
-				}else{
-					$search=$_GET['search'];
+				if (!isset($_GET['search'])) {
+					$search = "";
+				} else {
+					$search = $_GET['search'];
 				}
 				if (!isset($_GET['page'])) {
 					$page = 1;
 				} else {
 					$page = $_GET['page'];
 				}
-				$res=$this->main_model->get_view_alarm($idx);
-				$this->__scheduInsert("/board/updateNotice",array("idx"=>$idx,'res'=>$res,"idx"=>$idx));
+				$res = $this->main_model->get_view_alarm($idx);
+				$this->__scheduInsert("/board/updateNotice", array("idx" => $idx, 'res' => $res, "idx" => $idx));
 				break;
 			}
 			default:
@@ -263,7 +312,8 @@ class Index extends CI_Controller
 				echo "<script>alert('로그아웃이 되었습니다.');history.back(1);</script>";
 				break;
 			}
-			case "galleryAction":{
+			case "galleryAction":
+			{
 				$title = $this->input->post('title');
 				$contents = $this->input->post('contents');
 				$raw_name = "";
@@ -280,13 +330,15 @@ class Index extends CI_Controller
 				}
 				break;
 			}
-			case "galleryDelete":{
+			case "galleryDelete":
+			{
 				$idx = $this->input->post('idx');
 				$res = $this->main_model->delete_gallery($idx);
 				echo $res;
 				break;
 			}
-			case "galleryUpdate":{
+			case "galleryUpdate":
+			{
 				$idx = $_POST['idx'];
 				$title = $_POST['title'];
 				$contents = $_POST['contents'];
@@ -299,7 +351,8 @@ class Index extends CI_Controller
 				$res = $this->main_model->update_gallery($idx, $title, $contents, $raw_name);
 				var_dump($res);
 			}
-			case "noticeAction":{
+			case "noticeAction":
+			{
 				$title = $this->input->post('title');
 				$contents = $this->input->post('contents');
 				$raw_name = "";
@@ -316,13 +369,15 @@ class Index extends CI_Controller
 				}
 				break;
 			}
-			case "noticeDelete":{
+			case "noticeDelete":
+			{
 				$idx = $this->input->post('idx');
 				$res = $this->main_model->deletetNotice($idx);
 				echo($res);
 				break;
 			}
-			case "noticeUpdate":{
+			case "noticeUpdate":
+			{
 				$idx = $_POST['idx'];
 				$title = $_POST['title'];
 				$contents = $_POST['contents'];
@@ -333,7 +388,17 @@ class Index extends CI_Controller
 					$raw_name = $fileDeatil['raw_name'] . $fileDeatil['file_ext'];
 				}
 				$res = $this->main_model->update_noitce($idx, $title, $contents, $raw_name);
-				echo ($res);
+				echo($res);
+				break;
+			}
+			case "eventAction":
+			{
+				$start = $this->input->post('start');
+				$end = $this->input->post('end');
+				$title = $this->input->post('title');
+				$des = $this->input->post('description');
+				$res = $this->main_model->insert_event($start, $end, $title, $des);
+				echo $res;
 				break;
 			}
 			case "downFile":
@@ -352,25 +417,85 @@ class Index extends CI_Controller
 				readfile($filepath);
 				break;
 			}
+			case "eventUpdate":	{
+				$id = $_POST['id'];
+				$title = $_POST['title'];
+				$start = $_POST['start'];
+				$end = $_POST['end'];
+				$description = $_POST['description'];
+				$res = $this->main_model->eventUpdate($id, $title, $start, $end, $description);
+				echo $res;
+				break;
+			}
+			case "eventDelete":	{
+				$id = $this->input->post("id");
+				$res = $this->main_model->eventDelte($id);
+				echo $res;
+				break;
+			}
+			case "scheduleActions":	{
+				$title = $_POST['title'];
+				$contents = $_POST['contents'];
+				$period = $_POST['period'];
+				$table = '';
+				if ($period == "year") {
+					$table = "year_schedule";
+				} else if ($period == "month") {
+					$table = 'month_schedule';
+				}
+				echo $this->main_model->insertSche($title, $contents, $table);
+				break;
+			}
+			case "scheduleUpdate":{
+				$idx = $_POST['idx'];
+				$title = $_POST['title'];
+				$contents = $_POST['contents'];
+				$period = $_POST['period'];
+				if ($period == 'year') {
+					$table = 'year_schedule';
+				} else if ($period == 'month') {
+					$table = 'month_schedule';
+				};
+				echo $this->main_model->schUpdate($idx,$title,$contents,$table);
+				break;
+			}
+			case "scheduleDelete":{
+				$idx = $_POST['idx'];
+				$period = $_POST['period'];
+				if($period=='year'){
+					$table='year_schedule';
+				}else if($period=='month'){
+					$table='month_schedule';
+				};
+				echo $this->main_model->schDelete($idx,$table);
+				break;
+			}
 			default:
 				# code...
 				break;
 		}
 	}
-	function __mb_basename($path){
+
+	function __mb_basename($path)
+	{
 		return end(explode('/', $path));
 	}
-	function __utf2euc($str){
+
+	function __utf2euc($str)
+	{
 		return iconv("UTF-8", "cp949//IGNORE", $str);
 	}
-	function __is_ie(){
+
+	function __is_ie()
+	{
 		if (!isset($_SERVER['HTTP_USER_AGENT'])) return false;
 		if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false) return true; // IE8
 		if (strpos($_SERVER['HTTP_USER_AGENT'], 'Windows NT 6.1') !== false) return true; // IE11
 		return false;
 	}
 
-	function __upload($type){
+	function __upload($type)
+	{
 		if ($type == "gallery") {
 			$config['upload_path'] = './board/gallery/';
 		} else if ($type == "notice") {

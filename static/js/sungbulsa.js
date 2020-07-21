@@ -317,7 +317,6 @@ function updateScholarCnt() {
 
 
 function insertEvent() {
-    var type = 'insert';
     var start = $('#insertEvent-form .start').val();
     var end = $('#insertEvent-form .end').val();
     var title = $('#insertEvent-form .title').val();
@@ -334,11 +333,9 @@ function insertEvent() {
         return false;
     } else {
         $.ajax({
-            url: '../info/eventAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/eventAction`,
             type: 'POST',
             data: {
-                'type': type,
                 'start': start,
                 'end': end,
                 'title': title,
@@ -348,15 +345,10 @@ function insertEvent() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 등록되었습니다.');
-                    $('#insertEvent-form')[0].reset();
-                    location.href = "../info/month.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    $('#insertEvent-form')[0].reset();
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+                if(data){
+                	alert("등록이 되었습니다.");
+                	location.href=`${baseUrl}/index/info/month`;
+				}
             }
         }); //ajax
     }
@@ -365,26 +357,22 @@ function insertEvent() {
 
 function deleteEvent(id) {
     if (confirm('정말 삭제하시겠습니까?')) {
-        var type = 'delete';
         $.ajax({
-            url: '../info/eventAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/eventDelete`,
             type: 'POST',
             data: {
-                'type': type,
                 'id': id
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 삭제되었습니다.');
-                    location.href = "../info/updateEvent.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+				if(data){
+					alert("성공적으로 삭제되었습니다.");
+					location.href=`${baseUrl}/index/info/updateEvent`;
+				}else{
+					alert('오류가 발생했습니다.');
+				}
             }
         }); //ajax
     }
@@ -392,7 +380,6 @@ function deleteEvent(id) {
 /*행사삭제*/
 
 function updateEvent(id) {
-    var type = 'update';
     var start = $('#insertEvent-form .start').val();
     var end = $('#insertEvent-form .end').val();
     var title = $('#insertEvent-form .title').val();
@@ -409,11 +396,9 @@ function updateEvent(id) {
         return false;
     } else {
         $.ajax({
-            url: '../info/eventAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/eventUpdate`,
             type: 'POST',
             data: {
-                'type': type,
                 'start': start,
                 'end': end,
                 'title': title,
@@ -424,15 +409,13 @@ function updateEvent(id) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 수정되었습니다.');
-                    $('#insertEvent-form')[0].reset();
-                    location.href = "../info/updateEvent.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    $('#insertEvent-form')[0].reset();
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+                if(data){
+                	alert('수정이 되었습니다.');
+                	location.href=`${baseUrl}/index/info/month`;
+				}else{
+                	alert('오류가 있습니다.');
+					location.href=`${baseUrl}/index/info/month`;
+				}
             }
         }); //ajax
     }
@@ -812,20 +795,16 @@ function moveExecutive(way, seq, test, idx) {
 /*임원이동*/
 
 function insertSchedule(period) {
-    var type = 'insert';
     var title = $('#insert-schedule .title').val();
     var contents = $('#insert-schedule .contents').val();
-
     if (title.length < 1) {
         alert('제목을 입력해주세요');
         return false;
     } else {
         $.ajax({
-            url: '../info/scheduleAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/scheduleActions`,
             type: 'POST',
             data: {
-                'type': type,
                 'title': title,
                 'contents': contents,
                 'period': period
@@ -834,11 +813,11 @@ function insertSchedule(period) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
+                if (data) {
                     alert('성공적으로 입력되었습니다.');
                     $('#insert-schedule')[0].reset();
-                    location.href = "../info/schedule.php";
-                } else if (data.result == '0') {
+                    location.href = `${baseUrl}/index/info/schedule`;
+                } else {
                     alert('오류가 발생하였습니다.');
                     $('#insert-schedule')[0].reset();
                     console.log('result : ' + data.result + ', msg : ' + data.msg);
@@ -851,13 +830,10 @@ function insertSchedule(period) {
 
 function deleteSchedule(period, idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
-        var type = 'delete';
         $.ajax({
-            url: '../info/scheduleAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/scheduleDelete`,
             type: 'POST',
             data: {
-                'type': type,
                 'idx': idx,
                 'period': period
             },
@@ -865,13 +841,11 @@ function deleteSchedule(period, idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 삭제되었습니다.');
-                    location.href = "../info/schedule.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+                console.log(data);
+                if(data){
+                	alert('삭제가 되었습니다.');
+                	location.href=`${baseUrl}/index/info/schedule`;
+				}
             }
         }); //ajax
     }
@@ -879,7 +853,6 @@ function deleteSchedule(period, idx) {
 /*일정삭제*/
 
 function updateSchedule(period, idx) {
-    var type = 'update';
     var title = $('#insert-schedule .title').val();
     var contents = $('#insert-schedule .contents').val();
 
@@ -888,11 +861,9 @@ function updateSchedule(period, idx) {
         return false;
     } else {
         $.ajax({
-            url: '../info/scheduleAction.php',
-            dataType: 'JSON',
+            url: `${baseUrl}/index/action/scheduleUpdate`,
             type: 'POST',
             data: {
-                'type': type,
                 'title': title,
                 'contents': contents,
                 'period': period,
@@ -902,15 +873,10 @@ function updateSchedule(period, idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data.result == '1') {
-                    alert('성공적으로 수정되었습니다.');
-                    $('#insert-schedule')[0].reset();
-                    location.href = "../info/schedule.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    $('#insert-schedule')[0].reset();
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }
+                if(data){
+                	alert("수정이 되었습니다.");
+                	location.href=`${baseUrl}/index/info/schedule`;
+				}
             }
         }); //ajax
     }

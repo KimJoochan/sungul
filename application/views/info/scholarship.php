@@ -6,7 +6,8 @@
         <!-- 메모장 2번째 참고 1번째 완성후 가능할듯 -->
         <div class="scholar clearfix" style="border-bottom: 0;">
           <?php if(isset($_SESSION['id'])){?>
-          <span class="btn" onclick="location.href='../info/insertScholar.php?year=<?=$year?>'">등록하기</span><span class="btn" onclick="updateScholarCnt();">인원수 수정하기</span><?php } ?></div>
+          <span class="btn" onclick="location.href='<?=base_url()?>index/info/insertScholar?year=<?=$year?>'">등록하기</span><span class="btn" onclick="updateScholarCnt();">인원수 수정하기</span>
+		  <?php } ?></div>
 
         <div class="control clearfix">
           <div class="pull-left" onclick="location.href='<?=base_url()?>index/info/scholarship/<?php echo (int)$year-1; ?>'"><?php echo (int)$year-1; ?></div>
