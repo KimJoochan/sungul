@@ -5,9 +5,9 @@
 		<div class="bar"></div>
 		<div class="login">
 			<?php if(isset($_SESSION['id'])){ ?>
-				<a href="../board/logout.php">로그아웃</a>
+				<a href="<?=base_url()?>index/action/login_out">로그아웃</a>
 			<?php }else{ ?>
-				<a href="../board/login.php">로그인</a>
+				<a href="<?=base_url()?>index/board/login">로그인</a>
 			<?php } ?>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 				<li><a href="<?=base_url()?>index/info/schedule">법회일정</a></li>
 				<li><a href="<?=base_url()?>index/info/month">이달의 행사</a></li>
 				<li><a href="<?=base_url()?>index/board/notice">알림방</a></li>
-				<li><a href="../board/gallery.php">갤러리</a></li>
+				<li><a href="<?=base_url()?>index/board/gallery">갤러리</a></li>
 			</ul>
 			<ul>
 				<li><a href="<?=base_url()?>index/info/establish">설립취지</a></li>

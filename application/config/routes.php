@@ -6,4 +6,4 @@ $route['default_controller'] = 'index';
 $route['404_override'] = '';
 $rount['index/info/scholarship/(:num)']="$1";
 $route['translate_uri_dashes'] = FALSE;
-$rount['index/board/notice/(:num)/(:num)']="$1/$2";
+$rount['index/board/notice/(:num)/(:num)/(:num)']="$1/$2/$3";

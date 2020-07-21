@@ -8,7 +8,7 @@
         <?php } ?>
           <table class="table">
             <!-- 2번째 -->
-            <?php foreach($year_sch as $key => $value){?>
+            <?php foreach($month_sch as $key => $value){?>
                 <tr>
                 <td><?= $value->title?></td>
                 <td><?=$value->contents?></td>
@@ -29,7 +29,7 @@
         <?php } ?>
           <table class="table">
             <!-- 3번재 -->
-            <?php foreach($month_sch as $key => $value){ ?>
+            <?php foreach($year_sch as $key => $value){ ?>
                 <tr>
                     <td><?=$value->title?></td>
                     <td><?=$value->contents?></td>

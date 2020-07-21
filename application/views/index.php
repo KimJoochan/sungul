@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <div class="title">성불사는</div>
                   <div class="contents">부산의 명산인 금정산 고당봉을 바라보며<br>
                   우뚝 솟은 계명봉 줄기의 끝자락에 위치하고 있습니다.</div>
-                  <img src="<?=base_url()?>static/img/more.png" alt="" style="cursor: pointer" onclick="location.href='../info/info.php'" class="more">
+                  <img src="<?=base_url()?>static/img/more.png" alt="" style="cursor: pointer" onclick="location.href='<?=base_url()?>index/info/info'" class="more">
                 </div>
             </div>
             <script>
@@ -31,22 +31,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <section id="main-btns">
     <div class="inner">
       <div class="btns clearfix">
-        <div class="Btn" onclick="location.href='../info/info.php'">
+        <div class="Btn" onclick="location.href='<?=base_url()?>index/info/info'">
           <img src="<?=base_url()?>static/img/btn1.png" alt="">
           <div>도량소개</div>
         </div>
         <div class="bar"></div>
-        <div class="Btn" onclick="location.href='../info/greeting.php'">
+        <div class="Btn" onclick="location.href='<?=base_url()?>index/info/greeting'">
           <img src="<?=base_url()?>static/img/btn2.png" alt="">
           <div>인사말</div>
         </div>
         <div class="bar"></div>
-        <div class="Btn" onclick="location.href='../info/schedule.php'">
+        <div class="Btn" onclick="location.href='<?=base_url()?>index/info/schedule'">
           <img src="<?=base_url()?>static/img/btn3.png" alt="">
           <div>법회일정</div>
         </div>
         <div class="bar"></div>
-        <div class="Btn" onclick="location.href='../info/directions.php'">
+        <div class="Btn" onclick="location.href='<?=base_url()?>index/info/directions'">
           <img src="<?=base_url()?>static/img/btn4.png" alt="">
           <div>오시는길</div>
         </div>
@@ -68,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<!-- 메모장 index.68확인 -->
 			<?php foreach($notice as $key =>$value){ ?>
 			<li class="list clearfix">
-              <span class="title"><a href="../board/noticeView.php?idx=<?= $value->idx?>" class="listTitle"><?= $value->title ?></a></span>
+              <span class="title"><a href="<?=base_url()?>index/board/noticeView?idx=<?= $value->idx?>" class="listTitle"><?= $value->title ?></a></span>
               <span class="date"><?= substr($value->regdate,0,10) ?></span>
             </li>
 			<?php } ?>
@@ -78,10 +78,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <!-- 알림방 -->
 
       <section id="main-DD">
-        <div class="dal" onclick="location.href='../info/dalma.php'"><img src="<?=base_url()?>static/img/dal.png" alt=""></div>
-        <div class="dong" onclick="location.href='../info/establish.php'"><img src="<?=base_url()?>static/img/dong.png" alt=""></div>
-        <div class="dal_m" onclick="location.href='../info/dalma.php'"><img src="<?=base_url()?>static/img/dal_m.png" alt=""></div>
-        <div class="dong_m" onclick="location.href='../info/establish.php'"><img src="<?=base_url()?>static/img/dong_m.png" alt=""></div>
+        <div class="dal" onclick="location.href='<?=base_url()?>index/info/dalma'"><img src="<?=base_url()?>static/img/dal.png" alt=""></div>
+        <div class="dong" onclick="location.href='<?=base_url()?>index/info/establish'"><img src="<?=base_url()?>static/img/dong.png" alt=""></div>
+        <div class="dal_m" onclick="location.href='<?=base_url()?>index/info/dalma'"><img src="<?=base_url()?>static/img/dal_m.png" alt=""></div>
+        <div class="dong_m" onclick="location.href='<?=base_url()?>index/info/establish'"><img src="<?=base_url()?>static/img/dong_m.png" alt=""></div>
         
       </section>
       <!-- 달마,동지 -->
@@ -98,8 +98,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="main-gallery">
         <div class="img" style="background-image: url('<?=base_url()?>board/gallery/<?=$value->file?>')" onclick="location.href='../board/galleryView.php?idx=<?=$value->idx?>'"></div>
         <div class="text text-center">
-          <div class="title" onclick="location.href='../board/galleryView.php?idx=<?=$value->idx?>'"><?=$value->title?></div>
-          <div class="contents" onclick="location.href='../board/galleryView.php?idx=<?=$value->idx?>'"><?=$value->contents?></div>
+          <div class="title" onclick="location.href='<?=base_url()?>index/board/galleryView///<?=$value->idx?>'"><?=$value->title?></div>
+          <div class="contents" onclick="location.href='<?=base_url()?>index/board/galleryView///<?=$value->idx?>'"><?=$value->contents?></div>
           <div class="arrow"></div>
         </div>
       </div>

@@ -38,7 +38,7 @@
 			<div data-page="schedule" onclick="location.href='<?=base_url()?>index/info/schedule'">법회일정</div>
 			<div data-page="month" onclick="location.href='<?=base_url()?>index/info/month'">이달의 행사</div>
 			<div data-page="notice" onclick="location.href='<?=base_url()?>index/board/notice'">알림방</div>
-			<div data-page="gallery" onclick="location.href='../board/gallery.php'">갤러리</div>
+			<div data-page="gallery" onclick="location.href='<?=base_url()?>index/board/gallery'">갤러리</div>
 		</div>
     </div>
   </div>
@@ -51,10 +51,16 @@
 		var CurrentFileName = document.location.href;
 		let uri=CurrentFileName.split('/');
 		let resUrl=uri.reverse();
+		let Page2=Page.split('?')[0];
 		if(uri.length==8){ //뒤에서 첫번째 확인
 			Page=resUrl[1];
 		}else if(resUrl.length==9){
 			Page=resUrl[2];
+		}
+        else if(resUrl.length==10){
+			Page=resUrl[3];
+		}else{
+			Page=Page2;
 		}
 		var all = [ ['info','greeting','directions'],['dalma'],['establish','organization','scholarship','insertScholar','updateScholar',/*'rule',*/'executive','insertExecutive','updateExecutive','sponsor','insertSponsor','updateSponsor'],['schedule','insertSchedule','updateSchedule','month','insertEvent','updateEvent','updateEventEach','notice','insertNotice','noticeView','updateNotice','gallery','insertGallery','galleryView','updateGallery']];
 		//페이지들의 그룹들, 그 그룹의 가장 첫번째 꺼가 좌측그룹의 data-page와 동일
