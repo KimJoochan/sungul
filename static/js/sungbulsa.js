@@ -551,7 +551,6 @@ function insertGallery() {
 
 function gallery_search() {
     var search = $('#gallery .search-wrap>input').val();
-
     location.href = `${baseUrl}/index/board/gallery/1/${search}`;
 }
 /*갤러리 검색*/

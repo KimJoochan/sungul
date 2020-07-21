@@ -208,10 +208,7 @@ class Main_model extends CI_Model
 		}
 		return $e_page;
 	}
-	function s_point($page,$search,$uri_var){
-		if($search!="" && $page>=2){
-			$page=1;
-		}
+	function s_point($page){
 		$list=10;
 		$s_point = ($page - 1) * $list;
 		return $s_point;

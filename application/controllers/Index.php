@@ -222,6 +222,7 @@ class Index extends CI_Controller
 				}
 				$search = urldecode($search); //파라매타의 한글 깨짐 해결
 				$num = $this->main_model->get_count($search, $uri_var);
+				var_dump($num);
 				$page_num = $this->main_model->get_page_num($num, $uri_var);
 				$s_page = $this->main_model->s_page($page);
 				$e_page = $this->main_model->e_page($page_num, $page);
