@@ -6,12 +6,11 @@
 
       </div>
     </section>
-
     <section id="executive" class="page-section">
       <div class="inner" id="page-inner">
         <!-- <div class="title" id="page-title">임원현황</div> -->
         <?php if(isset($_SESSION['id'])){?>
-          <span class="btn" onclick="location.href='<?=base_url()?>index/info/insertExecutive'">등록하기</span>
+          <span class="btn" onclick="location.href='<?=base_url()?>esta/index/insertExecutive'">등록하기</span>
         <?php } ?>
         <table class="table text-center">
           <thead>
@@ -25,7 +24,6 @@
             </tr>
           </thead>
           <tbody class="exeTbody">
-         <!-- 메모장 org.28확인 -->
          <?php foreach($res as $key =>$value){ ?>
             <tr>
              <td><?=$value->job?></td>
@@ -35,7 +33,8 @@
               <td>
                 <img src="<?=base_url()?>static/img/top_icon.png" alt="" onclick="moveExecutive('up',<?= $value->seq ?>,<?= $min ?>,<?=$value->idx?>);">
                 <img src="<?=base_url()?>static/img/bottom_icon.png" alt="" onclick="moveExecutive('down',<?= $value->seq ?>,<?=$max ?>,<?=$value->idx?>);">
-                <img src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href='<?=base_url()?>index/info/updateExecutive?idx='+<?= $value->idx ?>">
+                <img src="<?=base_url()?>static/img/update.png" alt="" 
+                     onclick="location.href='<?=base_url()?>esta/index/updateExecutive?idx='+<?= $value->idx ?>">
               <img src="<?=base_url()?>static/img/delete.png" alt="" onclick="deleteExecutive(<?= $value->idx ?>);">
               </td>
             <?php } ?>

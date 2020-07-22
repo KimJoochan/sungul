@@ -1,7 +1,6 @@
 <section id="sponsor" class="page-section">
 	<div class="inner" id="page-inner">
 		<div class="title" id="page-title">후원자 등록하기</div>
-
 		<form action="" class="form-horizontal insert-sponsor" id="insert-sponsor">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">성명</label>
@@ -28,8 +27,5 @@
 			<div class="btn btn-lg fir" onclick="insertSponsor();">등록하기</div>
 			<div class="btn btn-lg sec" onclick="$('#insert-sponsor')[0].reset();">취소하기</div>
 		</div>
-
-
-
 	</div>
 </section>

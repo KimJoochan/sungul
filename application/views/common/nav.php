@@ -21,25 +21,25 @@
 		<div class="navs">
 			<div class="line"><a href="<?=base_url()?>index/info/info">우리도량소개</a></div>
 			<div class="line"><a href="<?=base_url()?>index/info/dalma">달마선원</a></div>
-			<div><a href="<?=base_url()?>index/info/establish">달마공동체<br>둥지장학회</a></div>
-			<div><a href="<?=base_url()?>index/info/schedule">정기법회<br>행사계획</a></div>
+			<div><a href="<?=base_url()?>esta/index/establish">달마공동체<br>둥지장학회</a></div>
+			<div><a href="<?=base_url()?>sche/index/schedule">정기법회<br>행사계획</a></div>
 		</div>
 	</div>
 
 	<div id="gnb">
 		<div class="inner clearfix" style="height:200px;">
 			<ul>
-				<li><a href="<?=base_url()?>index/info/schedule">법회일정</a></li>
-				<li><a href="<?=base_url()?>index/info/month">이달의 행사</a></li>
-				<li><a href="<?=base_url()?>index/board/notice">알림방</a></li>
-				<li><a href="<?=base_url()?>index/board/gallery">갤러리</a></li>
+				<li><a href="<?=base_url()?>sche/index/schedule">법회일정</a></li>
+				<li><a href="<?=base_url()?>sche/index/month">이달의 행사</a></li>
+				<li><a href="<?=base_url()?>sche/index/notice">알림방</a></li>
+				<li><a href="<?=base_url()?>sche/index/gallery">갤러리</a></li>
 			</ul>
 			<ul>
-				<li><a href="<?=base_url()?>index/info/establish">설립취지</a></li>
-				<li><a href="<?=base_url()?>index/info/organization">기구표, 임원현황</li>
-				<li><a href="<?=base_url()?>index/info/scholarship">장학금 수혜자</a></li>
+				<li><a href="<?=base_url()?>esta/index/establish">설립취지</a></li>
+                <li><a href="<?=base_url()?>esta/index/organization">기구표, 임원현황</a></li>
+				<li><a href="<?=base_url()?>esta/index/scholarship">장학금 수혜자</a></li>
 				<!-- <li><a href="../info/rule.php">장학회 회칙</a></li> -->
-				<li><a href="<?=base_url()?>index/info/sponsor">장학금 후원자현황</a></li>
+				<li><a href="<?=base_url()?>esta/index/sponsor">장학금 후원자현황</a></li>
 			</ul>
 			<ul>
 				<li><a href="<?=base_url()?>index/info/dalma">달마선원</a></li>
@@ -64,31 +64,31 @@
         <li class="sidebar-nav-item" data-toggle="collapse" href="#menu1_m" aria-expanded="false" aria-controls="menu1_m">우리도량소개
         </li>
         <div class="collapse" id="menu1_m">
-			<a href='<?=base_url()?>index/info/info'">도량소개</a>
-			<a href='<?=base_url()?>index/info/greeting'">주지스님인사말</a>
-			<a href='<?=base_url()?>index/info/directions'">오시는길</a>
+			<a href='<?=base_url()?>index/info/info'>도량소개</a>
+			<a href='<?=base_url()?>index/info/greeting'>주지스님인사말</a>
+			<a href='<?=base_url()?>index/info/directions'>오시는길</a>
 		</div>
 		<li class="sidebar-nav-item" data-toggle="collapse" href="#menu2_m" aria-expanded="false" aria-controls="menu2_m">달마선원
         </li>
         <div class="collapse" id="menu2_m">
-			<a href='<?=base_url()?>index/info/dalma'">달마선원</a>
+			<a href='<?=base_url()?>index/info/dalma'>달마선원</a>
 		</div>
 		<li class="sidebar-nav-item" data-toggle="collapse" href="#menu3_m" aria-expanded="false" aria-controls="menu3_m">달마공동체 둥지장학회
         </li>
         <div class="collapse" id="menu3_m">
-			<a href='<?=base_url()?>index/info/establish'">설립취지</a>
-			<a href='<?=base_url()?>index/info/organization'">기구표, 임원현황</a>
-			<a href='<?=base_url()?>index/info/scholarship'">장학금 수혜자</a><!--
+			<a href='<?=base_url()?>esta/index/establish'>설립취지</a>
+			<a href='<?=base_url()?>esta/index/organization'>기구표, 임원현황</a>
+			<a href='<?=base_url()?>esta/index/scholarship'>장학금 수혜자</a><!--
 			<a href='../info/rule.php'">장학회 회칙</a> -->
-			<a href='<?=base_url()?>index/info/sponsor'">장학금 후원자현황</a>
+			<a href='<?=base_url()?>esta/index/sponsor'>장학금 후원자현황</a>
 		</div>
 		<li class="sidebar-nav-item" data-toggle="collapse" href="#menu4_m" aria-expanded="false" aria-controls="menu4_m">정기법회 행사계획
         </li>
         <div class="collapse" id="menu4_m">
-			<a href='<?=base_url()?>index/info/schedule'">법회일정</a>
-			<a href='<?=base_url()?>index/info/month'">이달의 행사</a>
-			<a href='<?=base_url()?>index/board/notice'">알림방</a>
-			<a href='<?=base_url()?>index/board/gallery'">갤러리</a>
+			<a href='<?=base_url()?>sche/index/schedule'>법회일정</a>
+			<a href='<?=base_url()?>sche/index/month'>이달의 행사</a>
+			<a href='<?=base_url()?>sche/index/notice'>알림방</a>
+			<a href='<?=base_url()?>sche/index/gallery'>갤러리</a>
 		</div>
       </ul>
     </nav>

@@ -90,7 +90,6 @@ var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split
 
 function login() {
     var search = $('#gallery .search-wrap>input').val();
-
     var id = $('#loginform .id').val();
     var password = $('#loginform .password').val();
     if (id.length < 1) {
@@ -100,9 +99,8 @@ function login() {
         alert('비밀번호를 입력해주세요');
         return false;
     } else {
-    	console.log(baseUrl);
         $.ajax({
-            url: `${baseUrl}/index/action/login`,
+            url: `${baseUrl}/action/index/login`,
             dataType: 'html',
             type: 'POST',
             data: {
@@ -134,7 +132,7 @@ function insertScholar() {
     var grade = $('#insert-scholar .grade').val();
     var local = $('#insert-scholar .local').val();
     var degree = $('#insert-scholar .degree:checked').val();
-	var type='insert'
+    var type = 'insert'
     if (year.length < 1) {
         alert('장학년도를 입력해주세요');
         return false;
@@ -155,10 +153,10 @@ function insertScholar() {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/scholarAction`,
+            url: `${baseUrl}/action/index/scholarAction`,
             type: 'POST',
             data: {
-            	'type':type,
+                'type': type,
                 'year': year,
                 'name': name,
                 'degree': degree,
@@ -170,10 +168,10 @@ function insertScholar() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if(data){
-                	alert('등록이 되었습니다.');
-                	location.href=`${baseUrl}/index/info/scholarship/${year}`
-				}
+                if (data) {
+                    alert('등록이 되었습니다.');
+                    location.href = `${baseUrl}/esta/index/scholarship?year=${year}`
+                }
             }
         }); //ajax
     }
@@ -182,22 +180,22 @@ function insertScholar() {
 
 function deleteScholar(idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
-    	var type='delete';
+        var type = 'delete';
         $.ajax({
-            url: `${baseUrl}/index/action/scholarAction`,
+            url: `${baseUrl}/action/index/scholarAction`,
             type: 'POST',
             data: {
-            	'type':type,
+                'type': type,
                 'idx': idx
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data){
-                	alert('정상적으로 삭제되었습니다.');
-                	location.href=`${baseUrl}/index/info/scholarship`;
-				}
+                if (data) {
+                    alert('정상적으로 삭제되었습니다.');
+                    location.reload();
+                }
             }
         }); //ajax
     }
@@ -211,7 +209,7 @@ function updateScholar(idx) {
     var grade = $('#insert-scholar .grade').val();
     var local = $('#insert-scholar .local').val();
     var degree = $('#insert-scholar .degree:checked').val();
-	var type='update';
+    var type = 'update';
     if (year.length < 1) {
         alert('장학년도를 입력해주세요');
         return false;
@@ -232,10 +230,10 @@ function updateScholar(idx) {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/scholarAction`,
+            url: `${baseUrl}/action/index/scholarAction`,
             type: 'POST',
             data: {
-            	'type':type,
+                'type': type,
                 'year': year,
                 'name': name,
                 'degree': degree,
@@ -248,10 +246,10 @@ function updateScholar(idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if(data){
-                	alert('수정완료');
-                	location.href=`${baseUrl}/index/info/scholarship`;
-				}
+                if (data) {
+                    alert('수정완료');
+                    location.href = `${baseUrl}/esta/index/scholarship?year=${year}`;
+                }
             }
         }); //ajax
     }
@@ -269,7 +267,7 @@ function updateScholarCnt() {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/scholarAction`,
+            url: `${baseUrl}/action/index/scholarAction`,
             data: {
                 'grade1': grade1,
                 'grade2': grade2,
@@ -283,7 +281,10 @@ function updateScholarCnt() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                console.log(data);
+                if(data){
+                	alert("수정완료");
+					location.reload();
+				}
             }
         });
     }
@@ -308,7 +309,7 @@ function insertEvent() {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/eventAction`,
+            url: `${baseUrl}/action/index/eventAction`,
             type: 'POST',
             data: {
                 'start': start,
@@ -320,10 +321,10 @@ function insertEvent() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if(data){
-                	alert("등록이 되었습니다.");
-                	location.href=`${baseUrl}/index/info/month`;
-				}
+                if (data) {
+                    alert("등록이 되었습니다.");
+                    location.href = `${baseUrl}/index/info/month`;
+                }
             }
         }); //ajax
     }
@@ -333,7 +334,7 @@ function insertEvent() {
 function deleteEvent(id) {
     if (confirm('정말 삭제하시겠습니까?')) {
         $.ajax({
-            url: `${baseUrl}/index/action/eventDelete`,
+            url: `${baseUrl}/action/index/eventDelete`,
             type: 'POST',
             data: {
                 'id': id
@@ -342,12 +343,12 @@ function deleteEvent(id) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-				if(data){
-					alert("성공적으로 삭제되었습니다.");
-					location.href=`${baseUrl}/index/info/updateEvent`;
-				}else{
-					alert('오류가 발생했습니다.');
-				}
+                if (data) {
+                    alert("성공적으로 삭제되었습니다.");
+                    location.href = `${baseUrl}/index/info/updateEvent`;
+                } else {
+                    alert('오류가 발생했습니다.');
+                }
             }
         }); //ajax
     }
@@ -371,7 +372,7 @@ function updateEvent(id) {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/eventUpdate`,
+            url: `${baseUrl}/action/index/eventUpdate`,
             type: 'POST',
             data: {
                 'start': start,
@@ -384,13 +385,13 @@ function updateEvent(id) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if(data){
-                	alert('수정이 되었습니다.');
-                	location.href=`${baseUrl}/index/info/month`;
-				}else{
-                	alert('오류가 있습니다.');
-					location.href=`${baseUrl}/index/info/month`;
-				}
+                if (data) {
+                    alert('수정이 되었습니다.');
+                    location.href = `${baseUrl}/index/info/month`;
+                } else {
+                    alert('오류가 있습니다.');
+                    location.href = `${baseUrl}/index/info/month`;
+                }
             }
         }); //ajax
     }
@@ -400,35 +401,35 @@ function updateEvent(id) {
 function insertNotice() {
     var title = $('#insertNotice-form .title').val();
 
-	if (title.length < 1) {
-		alert('제목을 입력해주세요');
-		return false;
-	} else {
-		var formData = new FormData($("#insertNotice-form")[0]);
-		$.ajax({
-			url: `${baseUrl}/index/action/noticeAction`,
-			processData: false,
-			contentType: false,
-			dataType: 'html',
-			type: 'POST',
-			data: formData,
-			error: function (request, status, error) {
-				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-			},
-			success: function (data) {
-				if (data) {
-					alert('성공적으로 등록되었습니다.');
-					$('#insertNotice-form')[0].reset();
-					location.href = `${baseUrl}/index/board/notice`;
-				} else if (data.result == '0') {
-					alert('오류가 발생하였습니다.');
-					$('#insertNotice-form')[0].reset();
-					console.log('result : ' + data.result + ', msg : ' + data.msg +
-						', msg2 : ' + data.msg2);
-				}
-			}
-		}); //ajax
-	}
+    if (title.length < 1) {
+        alert('제목을 입력해주세요');
+        return false;
+    } else {
+        var formData = new FormData($("#insertNotice-form")[0]);
+        $.ajax({
+            url: `${baseUrl}/action/index/noticeAction`,
+            processData: false,
+            contentType: false,
+            dataType: 'html',
+            type: 'POST',
+            data: formData,
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            },
+            success: function (data) {
+                if (data) {
+                    alert('성공적으로 등록되었습니다.');
+                    $('#insertNotice-form')[0].reset();
+                    location.href = `${baseUrl}/index/board/notice`;
+                } else if (data.result == '0') {
+                    alert('오류가 발생하였습니다.');
+                    $('#insertNotice-form')[0].reset();
+                    console.log('result : ' + data.result + ', msg : ' + data.msg +
+                        ', msg2 : ' + data.msg2);
+                }
+            }
+        }); //ajax
+    }
 }
 /*알림방 등록하기*/
 
@@ -436,7 +437,7 @@ function deleteNotice(idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
         var file = $('#file-name').val();
         $.ajax({
-			url: `${baseUrl}/index/action/noticeDelete`,
+            url: `${baseUrl}/action/index/noticeDelete`,
             dataType: 'html',
             type: 'POST',
             data: {
@@ -445,19 +446,19 @@ function deleteNotice(idx) {
             },
             error: function (request, status, error) {},
             success: function (data) {
-				if(data){
-					alert("성공적으로 삭제되었습니다.");
-					location.href=`${baseUrl}/index/board/notice`;
-				}else{
-					alert('오류가 발생했습니다.');
-				}
-               /* if (data.result == '1') {
-                    alert('성공적으로 삭제되었습니다.');
-                    location.href = "../board/notice.php";
-                } else if (data.result == '0') {
-                    alert('오류가 발생하였습니다.');
-                    console.log('result : ' + data.result + ', msg : ' + data.msg);
-                }*/
+                if (data) {
+                    alert("성공적으로 삭제되었습니다.");
+                    location.href = `${baseUrl}/index/board/notice`;
+                } else {
+                    alert('오류가 발생했습니다.');
+                }
+                /* if (data.result == '1') {
+                     alert('성공적으로 삭제되었습니다.');
+                     location.href = "../board/notice.php";
+                 } else if (data.result == '0') {
+                     alert('오류가 발생하였습니다.');
+                     console.log('result : ' + data.result + ', msg : ' + data.msg);
+                 }*/
             }
         }); //ajax
     }
@@ -486,7 +487,7 @@ function updateNotice(idx) {
         var formData = new FormData($("#updatetNotice-form")[0]);
 
         $.ajax({
-            url: `${baseUrl}/index/action/noticeUpdate`,
+            url: `${baseUrl}/action/index/noticeUpdate`,
             dataType: 'html',
             type: 'POST',
             processData: false,
@@ -496,7 +497,7 @@ function updateNotice(idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-            	 if (data) {
+                if (data) {
                     alert('성공적으로 수정되었습니다.');
                     $('#updatetNotice-form')[0].reset();
                     location.href = `${baseUrl}/index/board/notice`;
@@ -523,7 +524,7 @@ function insertGallery() {
     } else {
         var formData = new FormData($("#insertGallery-form")[0]);
         $.ajax({
-            url: `${baseUrl}/index/action/galleryAction`,
+            url: `${baseUrl}/action/index/galleryAction`,
             processData: false,
             contentType: false,
             dataType: 'html',
@@ -551,7 +552,7 @@ function insertGallery() {
 
 function gallery_search() {
     var search = $('#gallery .search-wrap>input').val();
-    location.href = `${baseUrl}/index/board/gallery/1/${search}`;
+    location.href = `${baseUrl}/sche/index/gallery?page=1&search=${search}`;
 }
 /*갤러리 검색*/
 
@@ -560,7 +561,7 @@ function deleteGallery(idx) {
         var type = 'delete';
         var file = $('#file_name').val();
         $.ajax({
-            url: `${baseUrl}/index/action/galleryDelete`,
+            url: `${baseUrl}/action/index/galleryDelete`,
             type: 'POST',
             data: {
                 'type': type,
@@ -592,7 +593,7 @@ function updateGallery(idx) {
     } else {
         var formData = new FormData($("#updateGallery-form")[0]);
         $.ajax({
-            url: `${baseUrl}/index/action/galleryUpdate`,
+            url: `${baseUrl}/action/index/galleryUpdate`,
             dataType: 'html',
             type: 'POST',
             processData: false,
@@ -606,7 +607,7 @@ function updateGallery(idx) {
                     alert('성공적으로 수정되었습니다.');
                     $('#updateGallery-form')[0].reset();
                     location.href = `${baseUrl}/index/board/gallery`;
-                } else{
+                } else {
                     alert('오류가 발생하였습니다.');
                     $('#updateGallery-form')[0].reset();
                     console.log('result : ' + data.result + ', msg : ' + data.msg + ', msg2 : ' + data.msg2);
@@ -633,7 +634,7 @@ function insertExecutive() {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/executiveAction`,
+            url: `${baseUrl}/action/index/executiveAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -645,10 +646,10 @@ function insertExecutive() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-               if(data){
-               		alert('등록이 되었습니다');
-               		location.href=`${baseUrl}/index/info/organization`;
-			   }
+                if (data) {
+                    alert('등록이 되었습니다');
+                    location.href = `${baseUrl}/esta/index/organization`;
+                }
             }
         }); //ajax
     }
@@ -659,7 +660,7 @@ function deleteExecutive(idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
         var type = 'delete';
         $.ajax({
-            url: `${baseUrl}/index/action/executiveAction`,
+            url: `${baseUrl}/action/index/executiveAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -669,10 +670,10 @@ function deleteExecutive(idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-				if(data){
-					alert('삭제 되었습니다');
-					location.href=`${baseUrl}/index/info/organization`;
-				}
+                if (data) {
+                    alert('삭제 되었습니다');
+                    location.href = `${baseUrl}/esta/index/organization`;
+                }
             }
         }); //ajax
     }
@@ -696,7 +697,7 @@ function updateExecutive(idx) {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/executiveAction`,
+            url: `${baseUrl}/action/index/executiveAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -711,8 +712,8 @@ function updateExecutive(idx) {
             success: function (data) {
                 if (data) {
                     alert('성공적으로 수정되었습니다.');
-                    location.href = `${baseUrl}/index/info/organization`;
-					$('#insert-executive')[0].reset();
+                    location.href = `${baseUrl}/esta/index/organization`;
+                    $('#insert-executive')[0].reset();
                 } else if (data.result == '0') {
                     alert('오류가 발생하였습니다.');
                     $('#insert-executive')[0].reset();
@@ -732,7 +733,7 @@ function moveExecutive(way, seq, test, idx) {
         console.log('seq 더 내려가지 않음.');
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/executiveAction`,
+            url: `${baseUrl}/action/index/executiveAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -743,13 +744,13 @@ function moveExecutive(way, seq, test, idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-            	var data=JSON.parse(data);
-            	if (data.result == '1') {
-					$('#executive .exeTbody').html(data.table);
-				} else if (data.result == '0') {
-					alert('오류가 발생하였습니다.');
-					console.log('result : ' + data.result + ', msg : ' + data.msg);
-				}
+                var data = JSON.parse(data);
+                if (data.result == '1') {
+                    $('#executive .exeTbody').html(data.table);
+                } else if (data.result == '0') {
+                    alert('오류가 발생하였습니다.');
+                    console.log('result : ' + data.result + ', msg : ' + data.msg);
+                }
             }
         }); //ajax
     }
@@ -764,7 +765,7 @@ function insertSchedule(period) {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/scheduleActions`,
+            url: `${baseUrl}/action/index/scheduleActions`,
             type: 'POST',
             data: {
                 'title': title,
@@ -793,7 +794,7 @@ function insertSchedule(period) {
 function deleteSchedule(period, idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
         $.ajax({
-            url: `${baseUrl}/index/action/scheduleDelete`,
+            url: `${baseUrl}/action/index/scheduleDelete`,
             type: 'POST',
             data: {
                 'idx': idx,
@@ -804,10 +805,10 @@ function deleteSchedule(period, idx) {
             },
             success: function (data) {
                 console.log(data);
-                if(data){
-                	alert('삭제가 되었습니다.');
-                	location.href=`${baseUrl}/index/info/schedule`;
-				}
+                if (data) {
+                    alert('삭제가 되었습니다.');
+                    location.href = `${baseUrl}/index/info/schedule`;
+                }
             }
         }); //ajax
     }
@@ -823,7 +824,7 @@ function updateSchedule(period, idx) {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/scheduleUpdate`,
+            url: `${baseUrl}/action/index/scheduleUpdate`,
             type: 'POST',
             data: {
                 'title': title,
@@ -835,10 +836,10 @@ function updateSchedule(period, idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if(data){
-                	alert("수정이 되었습니다.");
-                	location.href=`${baseUrl}/index/info/schedule`;
-				}
+                if (data) {
+                    alert("수정이 되었습니다.");
+                    location.href = `${baseUrl}/index/info/schedule`;
+                }
             }
         }); //ajax
     }
@@ -862,7 +863,7 @@ function insertSponsor() {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/sponsorAction`,
+            url: `${baseUrl}/action/index/sponsorAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -874,10 +875,10 @@ function insertSponsor() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if(data){
-                	alert('스퐅서 등록완료');
-					location.href=`${baseUrl}/index/info/sponsor`;
-				}
+                if (data) {
+                    alert('스퐅서 등록완료');
+                    location.href = `${baseUrl}/index/info/sponsor`;
+                }
             }
         }); //ajax
     }
@@ -901,7 +902,7 @@ function updateSponsor(idx) {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/index/action/sponsorAction`,
+            url: `${baseUrl}/action/index/sponsorAction`,
             type: 'POST',
             data: {
                 'type': type,
@@ -932,7 +933,7 @@ function deleteSponsor(idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
         var type = 'delete';
         $.ajax({
-            url: `${baseUrl}/index/action/sponsorAction`,
+            url: `${baseUrl}/action/index/sponsorAction`,
             type: 'POST',
             data: {
                 'type': type,

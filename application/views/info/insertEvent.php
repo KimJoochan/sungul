@@ -44,7 +44,6 @@
 		<div class="btn btn-lg insert" onclick="insertEvent();"> 등록하기</div>
 		<div class="btn btn-lg cancel" onclick="location.href='<?=base_url()?>index/info/month'"> 취소하기</div>
 	</div>
-	</div >
 </section>
 <script>
 	$(function () {

@@ -100,7 +100,7 @@ class Main_model extends CI_Model
 	}
 	function scholar_update_cnt($grade1,$grade2,$grade3,$grade4,$sum,$year){
 		$sql = "UPDATE scholarship_cnt SET grade1='$grade1',grade2='$grade2',grade3='$grade3',grade4='$grade4',sum='$sum' WHERE year='$year'";
-		echo $sql;
+		echo $this->db->query($sql);
 		//return $this->db->query($sql);
 	}
 	//임원직들에서 쓰이는 함수들
@@ -238,13 +238,7 @@ class Main_model extends CI_Model
 		$sql = "SELECT * from notice where idx=(select MIN(idx) from notice where idx > $idx and title LIKE '%$search%')";
 		return $this->db->query($sql)->result_array();
 	}
-	// 갤러리 삽입 함수
-	function insertGallery($files,$title,$contents){
-		$sql = "INSERT INTO gallery(title,contents,file,regdate) VALUES('$title','$contents','$files',now())";
-		var_dump($sql);
-		return $this->db->query($sql);
-	}
-	//알림 삽입
+    //알림 삽입
 	function insertNotice($files,$title,$contents){
 		$sql = "INSERT INTO notice(title,contents,file,regdate) VALUES('$title','$contents','$files',now())";
 		return $this->db->query($sql);
@@ -256,6 +250,13 @@ class Main_model extends CI_Model
 		return $res;
 
 	}
+	// 갤러리 삽입 함수
+	function insertGallery($files,$title,$contents){
+		$sql = "INSERT INTO gallery(title,contents,file,regdate) VALUES('$title','$contents','$files',now())";
+		var_dump($sql);
+		return $this->db->query($sql);
+	}
+	
 	function get_idx_gallery($idx){
 		$sql = "SELECT * FROM gallery WHERE idx = '$idx'";
 		$res=$this->db->query($sql)->result_array();

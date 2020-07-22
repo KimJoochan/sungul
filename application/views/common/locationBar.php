@@ -9,8 +9,8 @@
     	<div class="collapse" id="HL">
 			<div data-page="info" onclick="location.href='<?=base_url()?>index/info/info'">우리도량소개</div>
 			<div data-page="dalma" onclick="location.href='<?=base_url()?>index/info/dalma'">달마선원</div>
-			<div data-page="establish" onclick="location.href='<?=base_url()?>index/info/establish'">달마공동체 둥지장학회</div>
-			<div data-page="schedule" onclick="location.href='<?=base_url()?>index/info/schedule'">정기법회 행사계획</div>
+			<div data-page="establish" onclick="location.href='<?=base_url()?>esta/index/establish'">달마공동체 둥지장학회</div>
+			<div data-page="schedule" onclick="location.href='<?=base_url()?>sche/index/schedule'">정기법회 행사계획</div>
 		</div>
     </div>
     <div class="sub-2">
@@ -27,18 +27,18 @@
 		</div>
 		<button data-toggle="collapse" href="#mH3" aria-expanded="false" aria-controls="mH3" class="mHright" data-page="establish"></button>
 		<div class="collapse" id="mH3">
-			<div data-page="establish" onclick="location.href='<?=base_url()?>index/info/establish'">설립취지</div>
-			<div data-page="organization" onclick="location.href='<?=base_url()?>index/info/organization'">기구표, 임원현황</div>
-			<div data-page="scholarship" onclick="location.href='<?=base_url()?>index/info/scholarship'">장학금 수혜자</div>
+			<div data-page="establish" onclick="location.href='<?=base_url()?>esta/index/establish'">설립취지</div>
+			<div data-page="organization" onclick="location.href='<?=base_url()?>esta/index/organization'">기구표, 임원현황</div>
+			<div data-page="scholarship" onclick="location.href='<?=base_url()?>esta/index/scholarship'">장학금 수혜자</div>
 			<!-- <div data-page="rule" onclick="location.href='../info/rule.php'">장학회 회칙</div> -->
-			<div data-page="sponsor" onclick="location.href='<?=base_url()?>index/info/sponsor'">장학금 후원자현황</div>
+			<div data-page="sponsor" onclick="location.href='<?=base_url()?>esta/index/sponsor'">장학금 후원자현황</div>
 		</div>
 		<button data-toggle="collapse" href="#mH4" aria-expanded="false" aria-controls="mH4" class="mHright" data-page="schedule"></button>
 		<div class="collapse" id="mH4">
-			<div data-page="schedule" onclick="location.href='<?=base_url()?>index/info/schedule'">법회일정</div>
-			<div data-page="month" onclick="location.href='<?=base_url()?>index/info/month'">이달의 행사</div>
-			<div data-page="notice" onclick="location.href='<?=base_url()?>index/board/notice'">알림방</div>
-			<div data-page="gallery" onclick="location.href='<?=base_url()?>index/board/gallery'">갤러리</div>
+			<div data-page="schedule" onclick="location.href='<?=base_url()?>sche/index/schedule'">법회일정</div>
+			<div data-page="month" onclick="location.href='<?=base_url()?>sche/index/month'">이달의 행사</div>
+			<div data-page="notice" onclick="location.href='<?=base_url()?>sche/index/notice'">알림방</div>
+			<div data-page="gallery" onclick="location.href='<?=base_url()?>sche/index/gallery'">갤러리</div>
 		</div>
     </div>
   </div>

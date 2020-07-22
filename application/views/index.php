@@ -61,14 +61,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <section id="main-notice">
         <div class="notice-top clearfix">
           <div class="title">알림방</div>
-          <div class="plus" onclick="location.href='<?=base_url()?>index/board/notice'"><img src="<?=base_url()?>static/img/plus.png" alt=""></div>
+          <div class="plus" onclick="location.href='<?=base_url()?>sche/index/notice'"><img src="<?=base_url()?>static/img/plus.png" alt=""></div>
         </div>
         <div class="notice-bot">
           <ul>
 			<!-- 메모장 index.68확인 -->
 			<?php foreach($notice as $key =>$value){ ?>
 			<li class="list clearfix">
-              <span class="title"><a href="<?=base_url()?>index/board/noticeView?idx=<?= $value->idx?>" class="listTitle"><?= $value->title ?></a></span>
+              <span class="title"><a href="<?=base_url()?>sche/index/noticeView?idx=<?= $value->idx?>" class="listTitle"><?= $value->title ?></a></span>
               <span class="date"><?= substr($value->regdate,0,10) ?></span>
             </li>
 			<?php } ?>
@@ -90,7 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   
   <section id="main-gal">
     <div class="inner clearfix">
-      <div class="plus" onclick="location.href='<?=base_url()?>index/board/gallery'" style="cursor: pointer;"><img src="<?=base_url()?>static/img/plus.png" alt=""></div>
+      <div class="plus" onclick="location.href='<?=base_url()?>sche/index/gallery'" style="cursor: pointer;"><img src="<?=base_url()?>static/img/plus.png" alt=""></div>
       <div class="gal-title">갤러리</div>
       <div class="clearfix">
 	<!-- 메모장 index.89 확인 -->
@@ -98,8 +98,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="main-gallery">
         <div class="img" style="background-image: url('<?=base_url()?>board/gallery/<?=$value->file?>')" onclick="location.href='<?=base_url()?>index/board/galleryView?idx=<?=$value->idx?>'"></div>
         <div class="text text-center">
-          <div class="title" onclick="location.href='<?=base_url()?>index/board/galleryView///<?=$value->idx?>'"><?=$value->title?></div>
-          <div class="contents" onclick="location.href='<?=base_url()?>index/board/galleryView///<?=$value->idx?>'"><?=$value->contents?></div>
+          <div class="title" onclick="location.href='<?=base_url()?>sche/index/galleryView?idx=<?=$value->idx?>'"><?=$value->title?></div>
+          <div class="contents" onclick="location.href='<?=base_url()?>sche/index/galleryView?idx=<?=$value->idx?>'"><?=$value->contents?></div>
           <div class="arrow"></div>
         </div>
       </div>

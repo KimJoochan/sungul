@@ -12,11 +12,11 @@
 			</div>
 			<input type="hidden" id="file_name" value="<?= $now[0]['file'] ?>">
 			<div class="clearfix">
-				<a href="<?= base_url() ?>index/board/gallery/<?= $page ?>/<?= $search ?>"
+				<a href="<?= base_url() ?>sche/index/gallery?page=<?= $page ?>&search=<?= $search ?>"
 				   class="btn pull-right list-btn">목록</a>
 				<?php if (isset($_SESSION['id'])) { ?>
 					<a onclick="deleteGallery(<?= $now[0]['idx'] ?>);" class="btn pull-right list-btn delete">삭제하기</a>
-					<a href="<?= base_url() ?>index/board/updateGallery/<?= $page ?>/<?= $search ?>/<?= $idx ?>"
+					<a href="<?= base_url() ?>sche/index/updateGallery?page=<?= $page ?>&search=<?= $search ?>&idx=<?= $idx ?>"
 					   class="btn pull-right list-btn update">수정하기</a>
 				<?php } ?>
 			</div>
@@ -24,7 +24,7 @@
 				<div class="prev">
 					<div class="left">이전글</div>
 					<div class="title">
-						<a href="<?= base_url() ?>index/board/galleryView/<?= $page ?>/<?= $search ?>/<?= $pre[0]['idx'] ?>"><?= $pre[0]['title'] ?></a>
+						<a href="<?= base_url() ?>sche/index/galleryView?page=<?= $page ?>&search<?= $search ?>&idx=<?= $pre[0]['idx'] ?>"><?= $pre[0]['title'] ?></a>
 					</div>
 					<div class="regdate"><?php echo substr($pre[0]['regdate'], 0, 10) ?></div>
 				</div>
@@ -33,7 +33,7 @@
 				<div class="next">
 					<div class="left">다음글</div>
 					<div class="title">
-						<a href="<?= base_url() ?>index/board/galleryView/<?= $page ?>/<?= $search ?>/<?= $next[0]['idx'] ?>"><?= $next[0]['title'] ?></a>
+						<a href="<?= base_url() ?>sche/index/galleryView?page=<?= $page ?>&search<?= $search ?>&idx=<?= $next[0]['idx']?>"><?= $next[0]['title'] ?></a>
 					</div>
 					<div class="regdate"><?= substr($next[0]['regdate'], 0, 10) ?></div>
 				</div>

@@ -1,9 +1,7 @@
 <link href="<?=base_url()?>static/vendor/fullcalendar/fullcalendar.css" rel="stylesheet">
-
 <script src='<?=base_url()?>static/vendor/fullcalendar/lib/moment.min.js'></script>
 <script src='<?=base_url()?>static/vendor/fullcalendar/fullcalendar.js'></script>
 <script src='<?=base_url()?>static/vendor/fullcalendar/locale/ko.js'></script>
-
 <!-- 1번째 -->
 <?php
     $list = array();
