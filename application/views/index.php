@@ -79,9 +79,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
       <section id="main-DD">
         <div class="dal" onclick="location.href='<?=base_url()?>index/info/dalma'"><img src="<?=base_url()?>static/img/dal.png" alt=""></div>
-        <div class="dong" onclick="location.href='<?=base_url()?>index/info/establish'"><img src="<?=base_url()?>static/img/dong.png" alt=""></div>
+        <div class="dong" onclick="location.href='<?=base_url()?>esta/index/establish'"><img src="<?=base_url()?>static/img/dong.png" alt=""></div>
         <div class="dal_m" onclick="location.href='<?=base_url()?>index/info/dalma'"><img src="<?=base_url()?>static/img/dal_m.png" alt=""></div>
-        <div class="dong_m" onclick="location.href='<?=base_url()?>index/info/establish'"><img src="<?=base_url()?>static/img/dong_m.png" alt=""></div>
+        <div class="dong_m" onclick="location.href='<?=base_url()?>esta/index/establish'"><img src="<?=base_url()?>static/img/dong_m.png" alt=""></div>
         
       </section>
       <!-- 달마,동지 -->
@@ -96,7 +96,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- 메모장 index.89 확인 -->
 	<?php foreach($gallery as $key =>$value){ ?>
 		<div class="main-gallery">
-        <div class="img" style="background-image: url('<?=base_url()?>board/gallery/<?=$value->file?>')" onclick="location.href='<?=base_url()?>index/board/galleryView?idx=<?=$value->idx?>'"></div>
+        <div class="img" style="background-image: url('<?=base_url()?>board/gallery/<?=$value->file?>')" onclick="location.href='<?=base_url()?>sche/index/galleryView?idx=<?=$value->idx?>'"></div>
         <div class="text text-center">
           <div class="title" onclick="location.href='<?=base_url()?>sche/index/galleryView?idx=<?=$value->idx?>'"><?=$value->title?></div>
           <div class="contents" onclick="location.href='<?=base_url()?>sche/index/galleryView?idx=<?=$value->idx?>'"><?=$value->contents?></div>
