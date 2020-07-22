@@ -4,8 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Index extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->database();
-		$this->load->helper(array('form', 'url'));
 		$this->load->model('notice_model');
 		$this->load->model('login_model');
 		$this->load->model('gallery_model');
@@ -31,6 +29,10 @@ class Index extends CI_Controller{
 		$uri_var = ($this->uri->segment(3));
 		$this->__head();
 		switch ($uri_var) {
+			case "login":{
+				$this->load->view("/board/login");
+				break;
+			}
 			case 'info':
 				$this->__infoInsert("/info/info_2");
 				break;
@@ -46,6 +48,10 @@ class Index extends CI_Controller{
 				$this->load->view("/info/dalm_1");
 				$this->load->view("/common/locationBar");
 				$this->load->view("/info/dalm_2");
+				break;
+			}
+			default:{
+				redirect(base_url()."index");
 				break;
 			}
         }

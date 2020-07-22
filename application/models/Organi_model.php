@@ -31,8 +31,8 @@ class Organi_model extends CI_Model{
 		return $this->db->query($sql)->result_array();
 	}
 	function insert_exec($job,$name,$phone,$max){
-		$sql = "INSERT INTO executive(job,name,phone,regdate,seq) VALUES('$job','$name','$phone',now(),'$max')";
-		return $this->db->query($sql);
+		$sql = "INSERT INTO executive(job,name,phone,regdate,seq) VALUES(?,?,?,now(),?)";
+		return $this->db->query($sql,array($job,$name,$phone,$max));
 	}
 	function delete_exec($idx){
 		$sql = "DELETE FROM executive WHERE idx = '$idx'";

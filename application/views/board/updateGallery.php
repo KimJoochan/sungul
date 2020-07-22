@@ -7,21 +7,21 @@
             <label class="col-sm-3 control-label">제목</label>
             <div class="col-sm-9">
             <input type="hidden" name="idx" value="<?=$res[0]['idx']?>">
-              <input type="text" class="form-control title" name="title" value="<?=$res[0]['title']?>">
+              <input type="text" class="form-control title" name="title" value="<?=htmlspecialchars($res[0]['title'])?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-3 control-label">내용</label>
             <div class="col-sm-9">
-              <textarea style="resize: none;" class="form-control contents" name="contents"  rows="3"><?=$res[0]['contents']?></textarea>
+              <textarea style="resize: none;" class="form-control contents" name="contents"  rows="3"><?=htmlspecialchars($res[0]['contents'])?></textarea>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-3 control-label">첨부파일</label>
             <div class="col-sm-9">
               <input type="hidden" class="old-file" value="<?=$res[0]['file']?>">
-              <input type="file" class="file" name="file">
-              <div id="old-file-name">기존 파일 : <?=$res[0]['file']?></div>
+              <input type="file" class="file" name="file"><br>
+				기존 파일 :<input id="old-file-name" name="oldname" readonly="readonly" value="<?=$res[0]['file']?>">
             </div>
           </div>
         </form>

@@ -7,14 +7,14 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">제목</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control title" name="title" value="<?=$value['title']?>">
+					<input type="text" class="form-control title" name="title" value="<?=htmlspecialchars($value['title'])?>">
 					<input type="hidden" name="idx" value="<?=$idx?>">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">내용</label>
 				<div class="col-sm-9">
-					<textarea style="resize: none;" class="form-control contents" name="contents" rows="3"><?=$value['contents']?></textarea>
+					<textarea style="resize: none;" class="form-control contents" name="contents" rows="3"><?=htmlspecialchars($value['contents'])?></textarea>
 				</div>
 			</div>
 			<div class="form-group">
@@ -22,7 +22,7 @@
 				<div class="col-sm-9">
 					<input type="hidden" class="old-file" value="<?=$value['file']?>">
 					<input type="file" class="file" name="file">
-					<div id="old-file-name">기존 파일 : <?=$value['file']?></div>
+					기존 파일 : <input type="old_file" id="old-file-name" readonly="readonly" value="<?=$value['file']?>"></input>
 				</div>
 			</div>
 		</form>

@@ -7,7 +7,7 @@
 			<?php if(isset($_SESSION['id'])){ ?>
 				<a href="<?=base_url()?>action/index/login_out">로그아웃</a>
 			<?php }else{ ?>
-				<a href="<?=base_url()?>index/board/login">로그인</a>
+				<a href="<?=base_url()?>index/info/login">로그인</a>
 			<?php } ?>
 		</div>
 	</div>

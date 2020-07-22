@@ -3,8 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     class Esta extends CI_Controller{
     function __construct(){
 		parent::__construct();
-		$this->load->database();
-		$this->load->helper(array('form', 'url'));
 		$this->load->model('organi_model');
 		$this->load->model('scholar_model');
 		$this->load->model('spon_model');
@@ -64,7 +62,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     $this->__estaInsert("/info/updateSponsor",array('res'=>$res,'idx'=>$idx));
                     break;
                 }
-
                 case 'scholarship':	{
                     $year = $this->input->get('year');
                     if ($year == null) {
@@ -90,7 +87,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     $res=$this->scholar_model->get_scholar_idx($idx);
                     $this->__estaInsert('/info/updateScholar',array("res"=>$res,'idx'=>$idx));
                     break;
-                } 
+                }
+				default:{
+					redirect(base_url()."index");
+					break;
+				}
             }
         $this->load->view('/common/footer');
         }

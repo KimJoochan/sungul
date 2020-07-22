@@ -21,9 +21,8 @@ class Gallery_model extends CI_Model{
 	}
 	// 갤러리 삽입 함수
 	function insertGallery($files,$title,$contents){
-		$sql = "INSERT INTO gallery(title,contents,file,regdate) VALUES('$title','$contents','$files',now())";
-		var_dump($sql);
-		return $this->db->query($sql);
+		$sql = "INSERT INTO gallery(title,contents,file,regdate) VALUES(?,?,?,now())";
+		return $this->db->query($sql,array($title,$contents,$files));
 	}
 	//갤러리 삭제
 	function delete_gallery($idx){
@@ -32,8 +31,8 @@ class Gallery_model extends CI_Model{
 		return $query;
 	}
 	function update_gallery($idx,$title,$contents,$raw_name){
-		$sql = "UPDATE gallery SET title='$title',contents='$contents',file='$raw_name' WHERE idx='$idx'";
-		$query = $this->db->query($sql);
+		$sql = "UPDATE gallery SET title=?,contents=?,file=? WHERE idx=?";
+		$query = $this->db->query($sql,array($title,$contents,$raw_name,$idx));
 		return $query;
 	}
 

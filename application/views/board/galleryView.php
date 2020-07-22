@@ -6,7 +6,7 @@
 				<div class="title"><?= $now[0]['title']; ?></div>
 				<div class="date">작성일 : <?php echo substr($now[0]['regdate'], 0, 10) ?></div>
 			</div>
-			<div class="contents"><?php echo nl2br($now[0]['contents']); ?></div>
+			<div class="contents"><?php echo htmlspecialchars(nl2br($now[0]['contents'])); ?></div>
 			<div class="img">
 				<img src="<?= base_url() ?>board/gallery/<?= $now[0]['file'] ?>" alt="">
 			</div>
@@ -24,7 +24,7 @@
 				<div class="prev">
 					<div class="left">이전글</div>
 					<div class="title">
-						<a href="<?= base_url() ?>sche/index/galleryView?page=<?= $page ?>&search<?= $search ?>&idx=<?= $pre[0]['idx'] ?>"><?= $pre[0]['title'] ?></a>
+						<a href="<?= base_url() ?>sche/index/galleryView?page=<?= $page ?>&search<?= $search ?>&idx=<?= $pre[0]['idx'] ?>"><?= htmlspecialchars($pre[0]['title']) ?></a>
 					</div>
 					<div class="regdate"><?php echo substr($pre[0]['regdate'], 0, 10) ?></div>
 				</div>
@@ -33,7 +33,7 @@
 				<div class="next">
 					<div class="left">다음글</div>
 					<div class="title">
-						<a href="<?= base_url() ?>sche/index/galleryView?page=<?= $page ?>&search<?= $search ?>&idx=<?= $next[0]['idx']?>"><?= $next[0]['title'] ?></a>
+						<a href="<?= base_url() ?>sche/index/galleryView?page=<?= $page ?>&search<?= $search ?>&idx=<?= $next[0]['idx']?>"><?= htmlspecialchars($next[0]['title']) ?></a>
 					</div>
 					<div class="regdate"><?= substr($next[0]['regdate'], 0, 10) ?></div>
 				</div>

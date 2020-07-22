@@ -21,8 +21,8 @@ class Notice_model extends CI_Model{
 	}
 	//알림 삽입
 	function insertNotice($files,$title,$contents){
-		$sql = "INSERT INTO notice(title,contents,file,regdate) VALUES('$title','$contents','$files',now())";
-		return $this->db->query($sql);
+		$sql = "INSERT INTO notice(title,contents,file,regdate) VALUES(?,?,?,now())";
+		return $this->db->query($sql,array($title,$contents,$files));
 	}
 	function get_notice(){
 		$sql = "SELECT * FROM notice ORDER BY idx desc LIMIT 5";
@@ -31,14 +31,14 @@ class Notice_model extends CI_Model{
 	}
 	//알림방 삭제
 	function deletetNotice($idx){
-		$sql = "DELETE FROM notice WHERE idx = $idx";
+		$sql = "DELETE FROM notice WHERE idx =$idx";
 		$res=$this->db->query($sql);
 		return $res;
 
 	}
 	function update_noitce($idx,$title,$contents,$raw_name){
-		$sql = "UPDATE notice SET title='$title',contents='$contents',file='$raw_name' WHERE idx='$idx'";
-		$query = $this->db->query($sql);
+		$sql = "UPDATE notice SET title=?,contents=?,file=? WHERE idx=?";
+		$query = $this->db->query($sql,array($title,$contents,$raw_name,$idx));
 		return $query;
 	}
 }

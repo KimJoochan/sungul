@@ -52,10 +52,10 @@
                 <!-- 메모장 56번째 -->
                 <?php foreach($row as $key => $value){ ?>
                 <tr style="height:57px;">
-                    <td><?= $value->name ?></td>
-                    <td><?= $value->school ?></td>
-                    <td><?= $value->grade ?></td>
-                    <td><?= $value->local ?></td>
+                    <td><?= htmlspecialchars($value->name) ?></td>
+                    <td><?= htmlspecialchars($value->school) ?></td>
+                    <td><?= htmlspecialchars($value->grade) ?></td>
+                    <td><?= htmlspecialchars($value->local) ?></td>
                     <?php if(isset($_SESSION['id'])){?>
                     <td>
                         <img src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href='<?=base_url()?>esta/index/updateScholar?idx=<?= $value->idx ?>'">

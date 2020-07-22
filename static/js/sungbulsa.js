@@ -297,7 +297,7 @@ function insertEvent() {
     var end = $('#insertEvent-form .end').val();
     var title = $('#insertEvent-form .title').val();
     var description = $('#insertEvent-form .description').val();
-
+	var type='insert';
     if (start.length < 1) {
         alert('시작일을 입력해주세요');
         return false;
@@ -312,6 +312,7 @@ function insertEvent() {
             url: `${baseUrl}/action/index/eventAction`,
             type: 'POST',
             data: {
+            	'type':type,
                 'start': start,
                 'end': end,
                 'title': title,
@@ -332,11 +333,13 @@ function insertEvent() {
 /*행사등록하기*/
 
 function deleteEvent(id) {
+	var type='delete';
     if (confirm('정말 삭제하시겠습니까?')) {
         $.ajax({
-            url: `${baseUrl}/action/index/eventDelete`,
+            url: `${baseUrl}/action/index/eventAction`,
             type: 'POST',
             data: {
+            	'type':type,
                 'id': id
             },
             error: function (request, status, error) {
@@ -360,7 +363,7 @@ function updateEvent(id) {
     var end = $('#insertEvent-form .end').val();
     var title = $('#insertEvent-form .title').val();
     var description = $('#insertEvent-form .description').val();
-
+	var tyoe="update";
     if (start.length < 1) {
         alert('시작일을 입력해주세요');
         return false;
@@ -372,9 +375,10 @@ function updateEvent(id) {
         return false;
     } else {
         $.ajax({
-            url: `${baseUrl}/action/index/eventUpdate`,
+            url: `${baseUrl}/action/index/eventAction`,
             type: 'POST',
             data: {
+            	'type':tyoe,
                 'start': start,
                 'end': end,
                 'title': title,
@@ -407,7 +411,7 @@ function insertNotice() {
     } else {
         var formData = new FormData($("#insertNotice-form")[0]);
         $.ajax({
-            url: `${baseUrl}/action/index/noticeAction`,
+            url: `${baseUrl}/action/index/noticeAction?type=insert`,
             processData: false,
             contentType: false,
             dataType: 'html',
@@ -437,7 +441,7 @@ function deleteNotice(idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
         var file = $('#file-name').val();
         $.ajax({
-            url: `${baseUrl}/action/index/noticeDelete`,
+            url: `${baseUrl}/action/index/noticeAction?type=delete`,
             dataType: 'html',
             type: 'POST',
             data: {
@@ -452,13 +456,6 @@ function deleteNotice(idx) {
                 } else {
                     alert('오류가 발생했습니다.');
                 }
-                /* if (data.result == '1') {
-                     alert('성공적으로 삭제되었습니다.');
-                     location.href = "../board/notice.php";
-                 } else if (data.result == '0') {
-                     alert('오류가 발생하였습니다.');
-                     console.log('result : ' + data.result + ', msg : ' + data.msg);
-                 }*/
             }
         }); //ajax
     }
@@ -476,7 +473,6 @@ function updateNotice(idx) {
     var oldFile = $('#updatetNotice-form .old-file').val();
     var title = $('#updatetNotice-form .title').val();
     var contents = $('#updatetNotice-form .contents').val();
-
     if (title.length < 1) {
         alert('제목을 입력해주세요');
         return false;
@@ -485,9 +481,8 @@ function updateNotice(idx) {
         return false;
     } else {
         var formData = new FormData($("#updatetNotice-form")[0]);
-
         $.ajax({
-            url: `${baseUrl}/action/index/noticeUpdate`,
+            url: `${baseUrl}/action/index/noticeAction?type=update`,
             dataType: 'html',
             type: 'POST',
             processData: false,
@@ -513,18 +508,15 @@ function updateNotice(idx) {
 /*알림방수정하기*/
 
 function insertGallery() {
-    var type = 'insert';
     var title = $('#insertGallery-form .title').val();
     var search = $('#gallery .search-wrap>input').val();
-
-
     if (title.length < 1) {
         alert('제목을 입력해주세요');
         return false;
     } else {
         var formData = new FormData($("#insertGallery-form")[0]);
         $.ajax({
-            url: `${baseUrl}/action/index/galleryAction`,
+            url: `${baseUrl}/action/index/galleryAction?type=insert`,
             processData: false,
             contentType: false,
             dataType: 'html',
@@ -534,7 +526,7 @@ function insertGallery() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data) {
+               if (data) {
                     alert('성공적으로 등록되었습니다.');
                     $('#insertGallery-form')[0].reset();
                     location.href = `${baseUrl}/sche/index/gallery`;
@@ -558,13 +550,11 @@ function gallery_search() {
 
 function deleteGallery(idx) {
     if (confirm('정말 삭제하시겠습니까?')) {
-        var type = 'delete';
         var file = $('#file_name').val();
         $.ajax({
-            url: `${baseUrl}/action/index/galleryDelete`,
+            url: `${baseUrl}/action/index/galleryAction?type=delete`,
             type: 'POST',
             data: {
-                'type': type,
                 'idx': idx,
                 'file': file
             },
@@ -593,8 +583,7 @@ function updateGallery(idx) {
     } else {
         var formData = new FormData($("#updateGallery-form")[0]);
         $.ajax({
-            url: `${baseUrl}/action/index/galleryUpdate`,
-            dataType: 'html',
+            url: `${baseUrl}/action/index/galleryAction?type=update`,
             type: 'POST',
             processData: false,
             contentType: false,
@@ -760,6 +749,7 @@ function moveExecutive(way, seq, test, idx) {
 function insertSchedule(period) {
     var title = $('#insert-schedule .title').val();
     var contents = $('#insert-schedule .contents').val();
+    var type='insert';
     if (title.length < 1) {
         alert('제목을 입력해주세요');
         return false;
@@ -768,6 +758,7 @@ function insertSchedule(period) {
             url: `${baseUrl}/action/index/scheduleActions`,
             type: 'POST',
             data: {
+            	'type':type,
                 'title': title,
                 'contents': contents,
                 'period': period
@@ -792,11 +783,13 @@ function insertSchedule(period) {
 /*일정등록*/
 
 function deleteSchedule(period, idx) {
+	var type='delete';
     if (confirm('정말 삭제하시겠습니까?')) {
         $.ajax({
             url: `${baseUrl}/action/index/scheduleDelete`,
             type: 'POST',
             data: {
+            	'type':type,
                 'idx': idx,
                 'period': period
             },
@@ -818,7 +811,7 @@ function deleteSchedule(period, idx) {
 function updateSchedule(period, idx) {
     var title = $('#insert-schedule .title').val();
     var contents = $('#insert-schedule .contents').val();
-
+	var type='update';
     if (title.length < 1) {
         alert('제목을 입력해주세요');
         return false;
@@ -827,6 +820,7 @@ function updateSchedule(period, idx) {
             url: `${baseUrl}/action/index/scheduleUpdate`,
             type: 'POST',
             data: {
+            	'type':type,
                 'title': title,
                 'contents': contents,
                 'period': period,

@@ -12,7 +12,7 @@
 			<?php if(strlen($view[0]['file'])>0){ ?>
 				<div class="file">
 					<div class="left">첨부파일</div>
-					<input type="hidden" id="file-name" value="<?=$view[0]['file']?>">
+					<input type="hidden" id="file-name" value="<?=htmlspecialchars($view[0]['file'])?>">
 					<div class="fileName"><a href="<?=base_url()?>action/index/downFile?fileName=<?=$view[0]['file']?>"><?=$view[0]['file']?></a></div>
 				</div>
 			<?php } ?>
@@ -37,7 +37,7 @@
 			<div class="next">
 				<div class="left">이전글</div>
 				<div class="title">
-					<a href="<?=base_url()?>sche/index/noticeView?page=<?=$page?>&idx=<?=$prevrow[0]['idx']?>&search=<?=$search?>"><?=$prevrow[0]['title']?><?php if(strlen($prevrow[0]['file'])>0){echo "<img src=\"../img/ico_bfile.gif\">";} ?></a>
+					<a href="<?=base_url()?>sche/index/noticeView?page=<?=$page?>&idx=<?=$prevrow[0]['idx']?>&search=<?=$search?>"><?=htmlspecialchars($prevrow[0]['title'])?><?php if(strlen($prevrow[0]['file'])>0){echo "<img src=\"../img/ico_bfile.gif\">";} ?></a>
 				</div>
 				<div class="regdate"><?= substr($prevrow[0]['regdate'],0,10)?></div>
 			</div>

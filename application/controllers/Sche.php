@@ -3,8 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Sche extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->database();
-		$this->load->helper(array('form', 'url'));
 		$this->load->model('notice_model');
 		$this->load->model('schedule_model');
 		$this->load->model('event_model');
@@ -152,10 +150,6 @@ class Sche extends CI_Controller{
 			}
 			case "insertGallery":{
 				$this->__scheduInsert("/board/insertGallery");
-				break;
-			}
-			case "login":{
-				$this->load->view("/board/login");
 				break;
 			}
 			case "updateGallery":{

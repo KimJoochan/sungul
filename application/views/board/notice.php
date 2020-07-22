@@ -25,7 +25,7 @@
 						<td><?php echo $num - $s_point - $i; ?></td>
 						<td class="title"><a
 									href="<?=base_url()?>sche/index/noticeView?page=<?= $page ?>&idx=<?= $value->idx; ?>&search=<?= $search ?>"
-									class="listTitle"><?= $value->title ?><?php if (strlen($value->file) > 0) {
+									class="listTitle"><?=htmlspecialchars($value->title) ?><?php if (strlen($value->file) > 0) {
 									echo "<img src='".base_url()."static/img/ico_bfile.gif'>";
 								} ?></a></td>
 						<td class="date"><?= substr($value->regdate, 0, 10) ?></td>
