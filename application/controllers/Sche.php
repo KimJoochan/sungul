@@ -5,8 +5,11 @@ class Sche extends CI_Controller{
 		parent::__construct();
 		$this->load->database();
 		$this->load->helper(array('form', 'url'));
-		$this->load->model('main_model');
-		$this->load->model('login_model');
+		$this->load->model('notice_model');
+		$this->load->model('schedule_model');
+		$this->load->model('event_model');
+		$this->load->model('common_model');
+		$this->load->model('gallery_model');
 	}
     function __head(){
 		$this->load->view('/common/header');
@@ -22,13 +25,13 @@ class Sche extends CI_Controller{
 		$this->__head();
 		switch ($uri_var) {
             case 'schedule':{
-				$get_year_sch = $this->main_model->get_year_schedule();
-				$get_month_sch = $this->main_model->get_month_schedule();
+				$get_year_sch = $this->schedule_model->get_year_schedule();
+				$get_month_sch = $this->schedule_model->get_month_schedule();
 				$this->__scheduInsert("/info/schedule_foo", array("year_sch" => $get_year_sch, "month_sch" => $get_month_sch));
 				break;
 			}
 			case 'month':{
-				$event = $this->main_model->get_event();
+				$event = $this->event_model->get_event();
 				$this->__scheduInsert("/info/month_sch", array('event' => $event));
 				break;
 			}
@@ -37,13 +40,13 @@ class Sche extends CI_Controller{
 				break;
 			}
 			case "updateEvent" :{
-				$res = $this->main_model->get_event_order_start();
+				$res = $this->event_model->get_event_order_start();
 				$this->__scheduInsert("/info/updateEvent", array('res' => $res));
 				break;
 			}
 			case "updateEventEach":{
 				$id = $this->input->get('id');
-				$res = $this->main_model->get_event_id($id);
+				$res = $this->event_model->get_event_id($id);
 				$this->__scheduInsert("info/updateEventEach", array('res' => $res));
 				break;
 			}
@@ -61,14 +64,11 @@ class Sche extends CI_Controller{
 				} else if ($_GET['type'] == 'month') {
 					$table = 'month_schedule';
 				};
-				$res = $this->main_model->show_schedule($idx, $table);
+				$res = $this->schedule_model->show_schedule($idx, $table);
 				$this->__scheduInsert("info/updateSch", array('res' => $res, 'idx' => $idx, 'type' => $type));
 				break;
-			}    
-            //sdfdsdsf    
+			}
 			case "notice":{
-				$page = $this->uri->segment(4);
-				$search = $this->uri->segment(5);
 				if ($this->input->get('page') == null) {
 					$page = 1;
 				}else{
@@ -80,12 +80,12 @@ class Sche extends CI_Controller{
                     $search=$this->input->get('search');
                 }
 				$search = urldecode($search); //파라매타의 한글 깨짐 해결
-				$num = $this->main_model->get_count($search, $uri_var);
-				$page_num = $this->main_model->get_page_num($num, $uri_var);
-				$s_page = $this->main_model->s_page($page);
-				$e_page = $this->main_model->e_page($page_num, $page);
-				$s_point = $this->main_model->s_point($page, $search, $uri_var);
-				$res = $this->main_model->res($search, $s_point, $uri_var);
+				$num = $this->common_model->get_count($search, $uri_var);
+				$page_num = $this->common_model->get_page_num($num, $uri_var);
+				$s_page = $this->common_model->s_page($page);
+				$e_page = $this->common_model->e_page($page_num, $page);
+				$s_point = $this->common_model->s_point($page, $search, $uri_var);
+				$res = $this->common_model->res($search, $s_point, $uri_var);
                 
                 $data['search']=$search;
                 $data['s_point']=$s_point;
@@ -109,12 +109,12 @@ class Sche extends CI_Controller{
 					$search = "";
 				}
 				$search = urldecode($search); //파라매타의 한글 깨짐 해결
-				$num = $this->main_model->get_count($search, $uri_var);
-				$page_num = $this->main_model->get_page_num($num, $uri_var);
-				$s_page = $this->main_model->s_page($page);
-				$e_page = $this->main_model->e_page($page_num, $page);
-				$s_point = $this->main_model->s_point($page, $search, $uri_var);
-				$res = $this->main_model->res($search, $s_point, $uri_var);
+				$num = $this->common_model->get_count($search, $uri_var);
+				$page_num = $this->common_model->get_page_num($num, $uri_var);
+				$s_page = $this->common_model->s_page($page);
+				$e_page = $this->common_model->e_page($page_num, $page);
+				$s_point = $this->common_model->s_point($page, $search, $uri_var);
+				$res = $this->common_model->res($search, $s_point, $uri_var);
                 $data['block']=5;
                 $data['search']=$search;
                 $data['s_point']=$s_point;
@@ -138,9 +138,9 @@ class Sche extends CI_Controller{
 					$search = "";
 				}
 				$search = urldecode($search); //파라매타의 한글 깨짐 해결
-				$now_gallery = $this->main_model->get_idx_gallery($idx);
-				$previous_gallery = $this->main_model->get_previous_idx($idx, $search);
-				$next_gallery = $this->main_model->get_next_idx($idx, $search);
+				$now_gallery = $this->gallery_model->get_idx_gallery($idx);
+				$previous_gallery = $this->gallery_model->get_previous_idx($idx, $search);
+				$next_gallery = $this->gallery_model->get_next_idx($idx, $search);
                 $data['idx']=$idx;
                 $data['search']=$search;
                 $data['page']=$page;
@@ -170,7 +170,7 @@ class Sche extends CI_Controller{
 				}else{
 					$search=$this->input->get('search');
 				}
-				$res = $this->main_model->get_idx_gallery($idx);
+				$res = $this->gallery_model->get_idx_gallery($idx);
                 $data['idx']=$idx;
                 $data['search']=$search;
                 $data['page']=$page;
@@ -190,9 +190,9 @@ class Sche extends CI_Controller{
 					$search = $this->input->get['search'];
 				}
 				$idx = $_GET['idx'];//idx값
-				$view = $this->main_model->get_view_alarm($idx);
-				$pre_view = $this->main_model->get_previous_view($idx, $search);
-				$next_view = $this->main_model->get_next_view($idx, $search);
+				$view = $this->notice_model->get_view_alarm($idx);
+				$pre_view = $this->notice_model->get_previous_view($idx, $search);
+				$next_view = $this->notice_model->get_next_view($idx, $search);
                 $data['view']=$view;
                 $data['page']=$page;
                 $data['search']=$search;
@@ -207,18 +207,20 @@ class Sche extends CI_Controller{
 				break;
 			}
 			case "updateNotice":{
-				$idx = $this->input->get['idx'];
-				if (!isset($this->input->get['search'])) {
+				$idx = $this->input->get('idx');
+				$search=$this->input->get('search');
+				$page=$this->input->get('page');
+				if ($search==null){
 					$search = "";
 				} else {
-					$search = $this->input->get['search'];
+					$search = $this->input->get('search');
 				}
-				if (!isset($this->input->get['page'])) {
+				if ($page==null){
 					$page = 1;
 				} else {
-					$page = $this->input->get['page'];
+					$page = $this->input->get('page');
 				}
-				$res = $this->main_model->get_view_alarm($idx);
+				$res = $this->notice_model->get_view_alarm($idx);
 				$this->__scheduInsert("/board/updateNotice", array("idx" => $idx, 'res' => $res, "idx" => $idx));
 				break;
 			}

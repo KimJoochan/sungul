@@ -5,8 +5,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		parent::__construct();
 		$this->load->database();
 		$this->load->helper(array('form', 'url'));
-		$this->load->model('main_model');
-		$this->load->model('login_model');
+		$this->load->model('organi_model');
+		$this->load->model('scholar_model');
+		$this->load->model('spon_model');
 	}
     function __head(){
 		$this->load->view('/common/header');
@@ -28,9 +29,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     break;
                 }
                 case 'organization':{
-                    $notice = $this->main_model->get_oragani();
-                    $max = $this->main_model->get_max();
-                    $min = $this->main_model->get_min();
+                    $notice = $this->organi_model->get_oragani();
+                    $max = $this->organi_model->get_max();
+                    $min = $this->organi_model->get_min();
                     $data['res']=$notice;
                     $data['max']=$max;
                     $data['min']=$min;
@@ -43,13 +44,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 }
                 case 'updateExecutive':{
                     $idx=$this->input->get('idx');
-                    $res=$this->main_model->get_exec_idx($idx);
+                    $res=$this->organi_model->get_exec_idx($idx);
                     $this->__estaInsert("/info/updateExecutive",array('res'=>$res,'idx'=>$idx));
                     break;
                 }
                 //스폰서작업페이지
                 case 'sponsor':	{
-                    $res = $this->main_model->get_by_name();
+                    $res = $this->spon_model->get_by_name();
                     $this->__estaInsert("/info/sponsor", array('res' => $res));
                     break;
                 }
@@ -59,7 +60,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 }
                 case "updateSponsor":{
                     $idx=$this->input->get('idx');
-                    $res=$this->main_model->select_sponsor($idx);
+                    $res=$this->spon_model->select_sponsor($idx);
                     $this->__estaInsert("/info/updateSponsor",array('res'=>$res,'idx'=>$idx));
                     break;
                 }
@@ -71,8 +72,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     } else {
                         $year =$this->input->get('year');
                     }
-                    $get_by_year = $this->main_model->get_by_year($year);
-                    $get_cnt = $this->main_model->get_cnt($year);
+                    $get_by_year = $this->scholar_model->get_by_year($year);
+                    $get_cnt = $this->scholar_model->get_cnt($year);
                     $data['year']=$year;
                     $data['row']=$get_by_year;
                     $data['row1']=$get_cnt;
@@ -86,7 +87,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 }
                 case "updateScholar":{
                     $idx=$this->input->get('idx');
-                    $res=$this->main_model->get_scholar_idx($idx);
+                    $res=$this->scholar_model->get_scholar_idx($idx);
                     $this->__estaInsert('/info/updateScholar',array("res"=>$res,'idx'=>$idx));
                     break;
                 } 

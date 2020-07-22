@@ -2,7 +2,7 @@
       <div class="inner" id="page-inner">
         <div class="title" id="page-title">장학금 후원자 현황</div>
         <?php if(isset($_SESSION['id'])){?>
-          <span class="btn" onclick="location.href='<?=base_url()?>index/info/insertSponsor'">등록하기</span>
+          <span class="btn" onclick="location.href='<?=base_url()?>esta/index/insertSponsor'">등록하기</span>
         <?php } ?>
         <table class="table text-center">
           <thead>
@@ -28,7 +28,7 @@
                 <td><?=$value->location?></td>
                 <?php if(isset($_SESSION['id'])){?>
                  <td>
-                   <img src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href='<?=base_url()?>index/info/updateSponsor?idx=<?=$value->idx ?>'">
+                   <img src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href='<?=base_url()?>esta/index/updateSponsor?idx=<?=$value->idx ?>'">
                  <img src="<?=base_url()?>static/img/delete.png" alt="" onclick="deleteSponsor(<?= $value->idx ?>);">
                  </td>
                <?php } ?>

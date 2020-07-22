@@ -323,7 +323,7 @@ function insertEvent() {
             success: function (data) {
                 if (data) {
                     alert("등록이 되었습니다.");
-                    location.href = `${baseUrl}/index/info/month`;
+                    location.href = `${baseUrl}/sche/index/month`;
                 }
             }
         }); //ajax
@@ -345,7 +345,7 @@ function deleteEvent(id) {
             success: function (data) {
                 if (data) {
                     alert("성공적으로 삭제되었습니다.");
-                    location.href = `${baseUrl}/index/info/updateEvent`;
+                    location.href = `${baseUrl}/sche/index/updateEvent`;
                 } else {
                     alert('오류가 발생했습니다.');
                 }
@@ -387,10 +387,10 @@ function updateEvent(id) {
             success: function (data) {
                 if (data) {
                     alert('수정이 되었습니다.');
-                    location.href = `${baseUrl}/index/info/month`;
+                    location.href = `${baseUrl}/sche/index/month`;
                 } else {
                     alert('오류가 있습니다.');
-                    location.href = `${baseUrl}/index/info/month`;
+                    location.href = `${baseUrl}/sche/index/month`;
                 }
             }
         }); //ajax
@@ -420,7 +420,7 @@ function insertNotice() {
                 if (data) {
                     alert('성공적으로 등록되었습니다.');
                     $('#insertNotice-form')[0].reset();
-                    location.href = `${baseUrl}/index/board/notice`;
+                    location.href = `${baseUrl}/sche/index/notice`;
                 } else if (data.result == '0') {
                     alert('오류가 발생하였습니다.');
                     $('#insertNotice-form')[0].reset();
@@ -448,7 +448,7 @@ function deleteNotice(idx) {
             success: function (data) {
                 if (data) {
                     alert("성공적으로 삭제되었습니다.");
-                    location.href = `${baseUrl}/index/board/notice`;
+                    location.href = `${baseUrl}/sche/index/notice`;
                 } else {
                     alert('오류가 발생했습니다.');
                 }
@@ -500,7 +500,7 @@ function updateNotice(idx) {
                 if (data) {
                     alert('성공적으로 수정되었습니다.');
                     $('#updatetNotice-form')[0].reset();
-                    location.href = `${baseUrl}/index/board/notice`;
+                    location.href = `${baseUrl}/sche/index/notice`;
                 } else {
                     alert('오류가 발생하였습니다.');
                     $('#updatetNotice-form')[0].reset();
@@ -537,7 +537,7 @@ function insertGallery() {
                 if (data) {
                     alert('성공적으로 등록되었습니다.');
                     $('#insertGallery-form')[0].reset();
-                    location.href = `${baseUrl}/index/board/gallery`;
+                    location.href = `${baseUrl}/sche/index/gallery`;
                 } else if (data.result == '0') {
                     alert('오류가 발생하였습니다.');
                     $('#insertGallery-form')[0].reset();
@@ -574,7 +574,7 @@ function deleteGallery(idx) {
             success: function (data) {
                 if (data == '1') {
                     alert('성공적으로 삭제되었습니다.');
-                    location.href = `${baseUrl}/index/board/gallery`;
+                    location.href = `${baseUrl}/sche/index/gallery`;
                 } else if (data == '0') {
                     alert('오류가 발생하였습니다.');
                     console.log('result : ' + data.result + ', msg : ' + data.msg);
@@ -606,7 +606,7 @@ function updateGallery(idx) {
                 if (data) {
                     alert('성공적으로 수정되었습니다.');
                     $('#updateGallery-form')[0].reset();
-                    location.href = `${baseUrl}/index/board/gallery`;
+                    location.href = `${baseUrl}/sche/index/gallery`;
                 } else {
                     alert('오류가 발생하였습니다.');
                     $('#updateGallery-form')[0].reset();
@@ -779,7 +779,7 @@ function insertSchedule(period) {
                 if (data) {
                     alert('성공적으로 입력되었습니다.');
                     $('#insert-schedule')[0].reset();
-                    location.href = `${baseUrl}/index/info/schedule`;
+                    location.href = `${baseUrl}/sche/index/schedule`;
                 } else {
                     alert('오류가 발생하였습니다.');
                     $('#insert-schedule')[0].reset();
@@ -807,7 +807,7 @@ function deleteSchedule(period, idx) {
                 console.log(data);
                 if (data) {
                     alert('삭제가 되었습니다.');
-                    location.href = `${baseUrl}/index/info/schedule`;
+                    location.href = `${baseUrl}/sche/index/schedule`;
                 }
             }
         }); //ajax
@@ -838,7 +838,7 @@ function updateSchedule(period, idx) {
             success: function (data) {
                 if (data) {
                     alert("수정이 되었습니다.");
-                    location.href = `${baseUrl}/index/info/schedule`;
+                    location.href = `${baseUrl}/sche/index/schedule`;
                 }
             }
         }); //ajax
@@ -851,7 +851,6 @@ function insertSponsor() {
     var money = $('#insert-sponsor .money').val();
     var name = $('#insert-sponsor .name').val();
     var location2 = $('#insert-sponsor .location').val();
-
     if (money.length < 1) {
         alert('후원금액을 입력해주세요');
         return false;
@@ -875,9 +874,9 @@ function insertSponsor() {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
-                if (data) {
+            	if (data) {
                     alert('스퐅서 등록완료');
-                    location.href = `${baseUrl}/index/info/sponsor`;
+                    location.href = `${baseUrl}/esta/index/sponsor`;
                 }
             }
         }); //ajax
@@ -915,6 +914,7 @@ function updateSponsor(idx) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success: function (data) {
+            	console.log(data);
                 if (data) {
                     alert('성공적으로 수정되었습니다.');
                     history.back();
@@ -945,7 +945,7 @@ function deleteSponsor(idx) {
             success: function (data) {
                 if (data) {
                     alert('성공적으로 삭제되었습니다.');
-                    location.href = `${baseUrl}/index/info/sponsor`;
+                    location.href = `${baseUrl}/esta/index/sponsor`;
                 } else if (data.result == '0') {
                     alert('오류가 발생하였습니다.');
                     console.log('result : ' + data.result + ', msg : ' + data.msg);

@@ -5,7 +5,7 @@
                 <div class="title">월 정기법회<div class="bar"></div>
                 </div>
                 <?php if(isset($_SESSION['id'])){?>
-                <span class="btn" onclick="location.href='<?=base_url()?>index/info/insertSchedule?type=month'">등록하기</span>
+                <span class="btn" onclick="location.href='<?=base_url()?>sche/index/insertSchedule?type=month'">등록하기</span>
                 <?php } ?>
                 <table class="table">
                     <!-- 2번째 -->
@@ -15,7 +15,7 @@
                         <td><?=$value->contents?></td>
                         <?php if(isset($_SESSION['id'])){?>
                         <td>
-                            <img src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href='<?=base_url()?>index/info/updateSchedule?idx=<?=$value->idx ?>&type=month'">
+                            <img src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href='<?=base_url()?>sche/index/updateSchedule?idx=<?=$value->idx ?>&type=month'">
                             <img src="<?=base_url()?>static/img/delete.png" alt="" onclick="deleteSchedule('month',<?= $value->idx ?>);">
                         </td>
                         <?php } ?>
@@ -27,7 +27,7 @@
                 <div class="title">년간 정기법회 및 명절 차례불공<div class="bar"></div>
                 </div>
                 <?php if(isset($_SESSION['id'])){?>
-                <span class="btn" onclick="location.href='<?=base_url()?>index/info/insertSchedule?type=year'">등록하기</span>
+                <span class="btn" onclick="location.href='<?=base_url()?>sche/index/insertSchedule?type=year'">등록하기</span>
                 <?php } ?>
                 <table class="table">
                     <!-- 3번재 -->
@@ -37,7 +37,7 @@
                         <td><?=$value->contents?></td>
                         <?php if(isset($_SESSION['id'])){?>
                         <td>
-                            <img src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href=`<?=base_url()?>index/info/updateSchedule?idx=${<?= $value->idx ?>}&type=year`">
+                            <img src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href=`<?=base_url()?>sche/index/updateSchedule?idx=${<?= $value->idx ?>}&type=year`">
                             <img src="<?=base_url()?>static/img/delete.png" alt="" onclick="deleteSchedule('year',<?= $value->idx ?>);">
                         </td>
                         <?php } ?>

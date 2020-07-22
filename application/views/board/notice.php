@@ -24,7 +24,7 @@
 						<!-- main_model에서 $num값을 넘겨야 함, $s_point값도 넘겨야 함,$page도 넘겨야 함 -->
 						<td><?php echo $num - $s_point - $i; ?></td>
 						<td class="title"><a
-									href="<?=base_url()?>board/index/noticeView?page=<?= $page ?>&idx=<?= $value->idx; ?>&search=<?= $search ?>"
+									href="<?=base_url()?>sche/index/noticeView?page=<?= $page ?>&idx=<?= $value->idx; ?>&search=<?= $search ?>"
 									class="listTitle"><?= $value->title ?><?php if (strlen($value->file) > 0) {
 									echo "<img src='".base_url()."static/img/ico_bfile.gif'>";
 								} ?></a></td>
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 			<?php if (isset($_SESSION['id'])) { ?>
-				<a href="<?=base_url()?>board/index/insertNotice" class="btn btn-lg pull-right insert-btn">등록하기</a>
+				<a href="<?=base_url()?>sche/index/insertNotice" class="btn btn-lg pull-right insert-btn">등록하기</a>
 			<?php } ?>
 </ul>
 <tr>

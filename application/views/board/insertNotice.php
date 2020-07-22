@@ -24,7 +24,7 @@
         </form>
         <div class="text-center" style="margin-top: 20px;">
           <div class="btn btn-lg insert" onclick="insertNotice();">등록하기</div>
-          <div class="btn btn-lg cancel" onclick="location.href='<?=base_url()?>index/board/notice'">취소하기</div>
+          <div class="btn btn-lg cancel" onclick="location.href='<?=base_url()?>sche/index/notice'">취소하기</div>
         </div>
       </div>
     </section>

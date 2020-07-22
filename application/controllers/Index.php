@@ -6,8 +6,9 @@ class Index extends CI_Controller{
 		parent::__construct();
 		$this->load->database();
 		$this->load->helper(array('form', 'url'));
-		$this->load->model('main_model');
+		$this->load->model('notice_model');
 		$this->load->model('login_model');
+		$this->load->model('gallery_model');
 	}
 	function __head(){
 		$this->load->view('/common/header');
@@ -19,8 +20,8 @@ class Index extends CI_Controller{
 		$this->load->view($arg);
 	}
 	public function index(){ //맨처음 화면
-        $notice = $this->main_model->get_notice();
-		$gallery = $this->main_model->get_gallery();
+        $notice = $this->notice_model->get_notice();
+		$gallery = $this->gallery_model->get_gallery();
 		$this->__head();
 		$this->load->view('index', array('notice' => $notice, 'gallery' => $gallery));
 		$this->load->view('/common/footer');

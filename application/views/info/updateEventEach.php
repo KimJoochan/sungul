@@ -38,7 +38,7 @@
 			</form>
 			<div class="text-center" style="margin-top: 20px;">
 				<div class="btn btn-lg insert" onclick="updateEvent(<?=$value['id']?>);">수정하기</div>
-				<div class="btn btn-lg cancel" onclick="location.href='../info/updateEvent.php'">취소하기</div>
+				<div class="btn btn-lg cancel" onclick="location.href='<?=base_url()?>/sche/index/updateEvent'">취소하기</div>
 			</div>
 		</div>
 	</section>

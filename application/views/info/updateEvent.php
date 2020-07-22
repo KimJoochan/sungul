@@ -16,7 +16,7 @@
 			<td><?=$value['end']?></td>
 			<td><div class="des"><?=$value['description']?></div></td>
 			<td>
-				<img style="cursor: pointer;" src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href='<?=base_url()?>index/info/updateEventEach?id='+<?=$value['id']?>">
+				<img style="cursor: pointer;" src="<?=base_url()?>static/img/update.png" alt="" onclick="location.href='<?=base_url()?>sche/index/updateEventEach?id='+<?=$value['id']?>">
 				<img src="<?=base_url()?>static/img/delete.png" alt="" onclick="deleteEvent(<?= $value['id']?>);">
 			</td>
 		</tr>
