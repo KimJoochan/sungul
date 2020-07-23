@@ -7,47 +7,38 @@ class Index extends CI_Controller{
 		$this->load->model('notice_model');
 		$this->load->model('login_model');
 		$this->load->model('gallery_model');
+		$this->load->library('template');//자체적인 라이브러리
 	}
-	function __head(){
-		$this->load->view('/common/header');
-		$this->load->view('/common/nav');
-	}
-	function __infoInsert($arg)	{
-		$this->load->view("/info/info_com");
-		$this->load->view("/common/locationBar");
-		$this->load->view($arg);
-	}
+
 	public function index(){ //맨처음 화면
         $notice = $this->notice_model->get_notice();
 		$gallery = $this->gallery_model->get_gallery();
-		$this->__head();
+		$this->template->header(); //자체적인 라이브러리
 		$this->load->view('index', array('notice' => $notice, 'gallery' => $gallery));
 		$this->load->view('/common/footer');
 	}
     
 	public function info(){
 		$uri_var = ($this->uri->segment(3));
-		$this->__head();
+		$this->template->header();
 		switch ($uri_var) {
 			case "login":{
 				$this->load->view("/board/login");
 				break;
 			}
 			case 'info':
-				$this->__infoInsert("/info/info_2");
+				$this->template->infoInsert("/info/info_2");
 				break;
 			case 'greeting':{
-				$this->__infoInsert("/info/greeting_2");
+				$this->template->infoInsert("/info/greeting_2");
 				break;
 			}
 			case 'directions':{
-				$this->__infoInsert("/info/direction_2");
+				$this->template->infoInsert("/info/direction_2");
 				break;
 			}
 			case 'dalma':{
-				$this->load->view("/info/dalm_1");
-				$this->load->view("/common/locationBar");
-				$this->load->view("/info/dalm_2");
+				$this->template->dalma("/info/dalm_2");
 				break;
 			}
 			default:{

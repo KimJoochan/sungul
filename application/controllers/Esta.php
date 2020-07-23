@@ -6,10 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		$this->load->model('organi_model');
 		$this->load->model('scholar_model');
 		$this->load->model('spon_model');
-	}
-    function __head(){
-		$this->load->view('/common/header');
-		$this->load->view('/common/nav');
+		$this->load->library('template');
 	}
         
     function __estaInsert($arg, $par = ""){
@@ -17,10 +14,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		$this->load->view("/common/locationBar");
 		$this->load->view($arg, $par);
 	}
-        
     public function index(){
             $uri_var = ($this->uri->segment(3));
-            $this->__head();
+            $this->template->header();
             switch ($uri_var){
                 case 'establish':{
                     $this->__estaInsert("/info/esta_2");

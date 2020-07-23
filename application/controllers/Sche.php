@@ -8,49 +8,42 @@ class Sche extends CI_Controller{
 		$this->load->model('event_model');
 		$this->load->model('common_model');
 		$this->load->model('gallery_model');
+		$this->load->library('template');
 	}
-    function __head(){
-		$this->load->view('/common/header');
-		$this->load->view('/common/nav');
-	}
-    function __scheduInsert($arg = "", $par = "")	{
-		$this->load->view("/info/sche_com");
-		$this->load->view("/common/locationBar");
-		$this->load->view($arg, $par);
-	}
+
     public function index()	{
 		$uri_var = ($this->uri->segment(3));
-		$this->__head();
+		$this->template->header();
 		switch ($uri_var) {
             case 'schedule':{
 				$get_year_sch = $this->schedule_model->get_year_schedule();
 				$get_month_sch = $this->schedule_model->get_month_schedule();
-				$this->__scheduInsert("/info/schedule_foo", array("year_sch" => $get_year_sch, "month_sch" => $get_month_sch));
+				$this->template->scheduInsert("/info/schedule_foo", array("year_sch" => $get_year_sch, "month_sch" => $get_month_sch));
 				break;
 			}
 			case 'month':{
 				$event = $this->event_model->get_event();
-				$this->__scheduInsert("/info/month_sch", array('event' => $event));
+				$this->template->scheduInsert("/info/month_sch", array('event' => $event));
 				break;
 			}
 			case "insertEvent":	{
-				$this->__scheduInsert("/info/insertEvent");
+				$this->template->scheduInsert("/info/insertEvent");
 				break;
 			}
 			case "updateEvent" :{
 				$res = $this->event_model->get_event_order_start();
-				$this->__scheduInsert("/info/updateEvent", array('res' => $res));
+				$this->template->scheduInsert("/info/updateEvent", array('res' => $res));
 				break;
 			}
 			case "updateEventEach":{
 				$id = $this->input->get('id');
 				$res = $this->event_model->get_event_id($id);
-				$this->__scheduInsert("info/updateEventEach", array('res' => $res));
+				$this->template->scheduInsert("info/updateEventEach", array('res' => $res));
 				break;
 			}
 			case "insertSchedule":{
 				$type = $this->input->get("type");
-				$this->__scheduInsert("info/insertSchdule", array('type' => $type));
+				$this->template->scheduInsert("info/insertSchdule", array('type' => $type));
 				break;
 			}
 			case "updateSchedule":{
@@ -63,7 +56,7 @@ class Sche extends CI_Controller{
 					$table = 'month_schedule';
 				};
 				$res = $this->schedule_model->show_schedule($idx, $table);
-				$this->__scheduInsert("info/updateSch", array('res' => $res, 'idx' => $idx, 'type' => $type));
+				$this->template->scheduInsert("info/updateSch", array('res' => $res, 'idx' => $idx, 'type' => $type));
 				break;
 			}
 			case "notice":{
@@ -94,7 +87,7 @@ class Sche extends CI_Controller{
                 $data['s_page']=$s_page;
                 $data['e_page']=$e_page;
                 
-				$this->__scheduInsert("/board/notice",$data);
+				$this->template->scheduInsert("/board/notice",$data);
 				break;
 			}
 			case "gallery":	{
@@ -122,7 +115,7 @@ class Sche extends CI_Controller{
                 $data['page']=$page;
                 $data['s_page']=$s_page;
                 $data['e_page']=$e_page;
-				$this->__scheduInsert("/board/gallery",$data);
+				$this->template->scheduInsert("/board/gallery",$data);
 				break;
 			}
 			case "galleryView":	{
@@ -145,11 +138,11 @@ class Sche extends CI_Controller{
                 $data['now']=$now_gallery;
                 $data['pre']=$previous_gallery;
                 $data['next']=$next_gallery;
-				$this->__scheduInsert("/board/galleryView", $data);
+				$this->template->scheduInsert("/board/galleryView", $data);
 				break;
 			}
 			case "insertGallery":{
-				$this->__scheduInsert("/board/insertGallery");
+				$this->template->scheduInsert("/board/insertGallery");
 				break;
 			}
 			case "updateGallery":{
@@ -169,7 +162,7 @@ class Sche extends CI_Controller{
                 $data['search']=$search;
                 $data['page']=$page;
                 $data['res']=$res;
-				$this->__scheduInsert("/board/updateGallery", $data);
+				$this->template->scheduInsert("/board/updateGallery", $data);
 				break;
 			}
 			case "noticeView":{
@@ -193,11 +186,11 @@ class Sche extends CI_Controller{
                 $data['idx']=$idx;
                 $data['nextrow']=$next_view;
                 $data['prevrow']=$pre_view;
-				$this->__scheduInsert("/board/noticeView", $data);
+				$this->template->scheduInsert("/board/noticeView", $data);
 				break;
 			}
 			case "insertNotice":{
-				$this->__scheduInsert("/board/insertNotice");
+				$this->template->scheduInsert("/board/insertNotice");
 				break;
 			}
 			case "updateNotice":{
@@ -215,7 +208,7 @@ class Sche extends CI_Controller{
 					$page = $this->input->get('page');
 				}
 				$res = $this->notice_model->get_view_alarm($idx);
-				$this->__scheduInsert("/board/updateNotice", array("idx" => $idx, 'res' => $res, "idx" => $idx));
+				$this->template->scheduInsert("/board/updateNotice", array("idx" => $idx, 'res' => $res, "idx" => $idx));
 				break;
 			}
 			default:
